@@ -1,4 +1,5 @@
-# 航空公司运行知识库
+# 航空公司运行资料库
+
 面向航空公司运行领域的个人资料库，用于学习与备考。目前已完成 **航空气象** 模块，后续将持续扩充其他运行相关领域。
 
 在线访问：[https://31nm.github.io/aviation-knowledge/](https://31nm.github.io/aviation-knowledge/)
