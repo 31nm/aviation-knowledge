@@ -342,6 +342,57 @@ footer.site-foot{border-top:1px solid var(--border); padding:22px 0 30px; text-a
   body{background:#fff}
   .card{box-shadow:none; break-inside:avoid}
 }
+
+/* ===== 第二轮：本页目录 / 参考资料 / 相关知识点 / 授课 ===== */
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;margin:4px 0 14px}
+.toc-t{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:1.5px;margin-bottom:6px}
+.toc a{display:block;padding:3px 0;font-size:13.5px;color:var(--accent);cursor:pointer}
+.toc a:hover{text-decoration:underline}
+.card h4{scroll-margin-top:76px}
+.refs-block{background:var(--bg2);border:1px dashed var(--border2);border-radius:var(--radius-sm);padding:12px 15px;margin:0 0 14px}
+.refs-t{font-size:12px;font-weight:700;color:var(--text2);letter-spacing:1.5px;margin-bottom:6px}
+.ref-item{display:flex;gap:8px;font-size:13px;padding:3px 0;flex-wrap:wrap;align-items:baseline}
+.ref-name{font-weight:600;color:var(--text)}
+.ref-desc{color:var(--text3)}
+.rel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:6px}
+.rel-item{display:block;border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;background:var(--card);text-decoration:none}
+.rel-item:hover{border-color:var(--accent);text-decoration:none}
+.rel-t{font-size:14px;font-weight:600;color:var(--text)}
+.rel-m{font-size:12px;color:var(--text3);margin-top:2px}
+.src-tag{font-size:11px;color:var(--text3);margin-top:4px;text-align:right}
+.teach-btn{margin-left:auto;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent-deep);border-radius:10px;padding:7px 16px;min-height:40px;font-size:13.5px;font-weight:600;cursor:pointer}
+[data-theme="dark"] .teach-btn{color:var(--accent)}
+.head-teach{border:none;background:var(--accent);color:#fff;border-radius:10px;padding:0 16px;height:38px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.head-teach:hover{background:var(--accent-deep)}
+.ref-card .ref-type{font-size:12px;color:var(--text3);margin-top:4px}
+.ref-card .ref-topics{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.ref-card .ref-topics a{font-size:12px;background:var(--chip);color:var(--chip-text);padding:2px 9px;border-radius:999px;text-decoration:none}
+.ref-card .ref-topics a:hover{background:var(--accent-soft);color:var(--accent-deep)}
+/* 授课模式 */
+body.teach-mode .sidebar,body.teach-mode .search-wrap,body.teach-mode .hd-actions,body.teach-mode #toTop{display:none !important}
+body.teach-mode .layout{display:block}
+body.teach-mode .main{padding:0}
+body.teach-mode .main-inner{max-width:960px}
+.teach-wrap{min-height:calc(100vh - var(--header-h));display:flex;flex-direction:column;padding:28px 26px 40px}
+.teach-top{display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.teach-prog{font-size:15px;font-weight:700;color:var(--accent);margin-left:auto}
+.teach-exit{border:1px solid var(--border2);background:var(--card);color:var(--text2);border-radius:10px;padding:8px 16px;min-height:44px;font-size:14px;cursor:pointer}
+.teach-title{font-size:30px;line-height:1.35;margin-bottom:22px}
+.teach-points{display:flex;flex-direction:column;gap:14px;flex:1}
+.tp-card{display:flex;gap:14px;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;padding:16px 18px;align-items:flex-start}
+.tp-n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.tp-b{font-size:18px;line-height:1.7}
+.teach-nav{display:flex;gap:12px;margin-top:26px;align-items:center}
+.tp-nav{flex:1;min-height:48px;border:1px solid var(--border2);background:var(--card);border-radius:12px;font-size:16px;color:var(--accent);font-weight:600;cursor:pointer}
+.tp-nav:hover{background:var(--accent-soft)}
+.tp-src{min-height:44px;padding:8px 18px;border:1px solid var(--border2);background:var(--card);color:var(--text2);border-radius:10px;font-size:14px;cursor:pointer}
+@media (max-width:760px){
+ .teach-wrap{padding:20px 16px 32px}
+ .teach-title{font-size:28px}
+ .tp-b{font-size:17px}
+ .tp-nav,.teach-exit{min-height:48px}
+}
+
 </style>
 </head>
 <body>
@@ -363,6 +414,7 @@ footer.site-foot{border-top:1px solid var(--border); padding:22px 0 30px; text-a
     <div class="sr-results" id="srResults"></div>
   </div>
   <div class="hd-actions">
+    <button class="head-teach" onclick="startTeach(TOPICS[0].t)">授课</button>
     <button class="icon-btn" id="themeBtn" aria-label="切换主题" title="切换浅色/深色">
       <svg id="themeIconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg id="themeIconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
@@ -429,7 +481,7 @@ var MODULES=[
  {id:'m5',num:'五',kicker:'MODULE 05 · REGULATIONS & STANDARDS',title:'五 · 法规标准',desc:'ICAO 附件三、CCAR-117-R2 与服务、观测、预报、情报交换四部下位规范。',color:'#C97E0E'}
 ];
 var TOPICS=[
-{t:'m1-1',m:'m1',ti:'大气结构与垂直分层',s:'按温度垂直递减率分五层，对流层集中天气现象与几乎全部水汽。',h:`<p>大气由干洁空气、水汽、杂质三部分组成：氮气约 <strong>78%</strong>、氧气约 <strong>21%</strong>、氩气等痕量气体约 1%。其中<strong>水汽集中在对流层</strong>（1.5~2 km 高处约为地面一半，5 km 处仅 1/10），是成云致雨与释放凝结潜热的物质基础；臭氧主要集中在 10~50 km（最大浓度 20~30 km），吸收紫外线使平流层增温。</p>
+{t:'m1-1',m:'m1',ti:'大气结构与垂直分层',s:'按温度垂直递减率分五层，对流层集中天气现象与几乎全部水汽。',h:`<h4>分层要点</h4><ul><li>质量与水汽：对流层集中约 3/4 大气质量与几乎全部水汽。</li><li>臭氧集中在 20~30 km，吸收紫外线使平流层增温。</li><li>民航巡航层 FL350~FL410 位于平流层下部。</li></ul><p>大气由干洁空气、水汽、杂质三部分组成：氮气约 <strong>78%</strong>、氧气约 <strong>21%</strong>、氩气等痕量气体约 1%。其中<strong>水汽集中在对流层</strong>（1.5~2 km 高处约为地面一半，5 km 处仅 1/10），是成云致雨与释放凝结潜热的物质基础；臭氧主要集中在 10~50 km（最大浓度 20~30 km），吸收紫外线使平流层增温。</p>
 <p>按气温垂直递减率 γ=-ΔT/ΔZ，大气自下而上分为五层：对流层、平流层、中间层（至 85 km）、暖层（至 800 km）、散逸层。γ=0 为等温层，γ&lt;0 为逆温层。</p>
 <div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:22%"><col style="width:30%"><col style="width:48%"></colgroup>
@@ -439,8 +491,8 @@ var TOPICS=[
 <tr><td>中间层</td><td>~85 km</td><td>温度随高度降低，流星多在此烧毁</td></tr>
 <tr><td>暖层/散逸层</td><td>85 km 以上</td><td>电离层影响高频通信，与常规飞行基本无关</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span><b>分层顺序</b>：对流层→平流层→中间层→暖层→散逸层；<b>温度趋势</b>降→升→降→升；对流层高度<b>夏季&gt;冬季、低纬&gt;高纬</b>；巡航层在平流层下部。</div>`},
-{t:'m1-2',m:'m1',ti:'标准大气（ISA）',s:'海平面 15℃、1013.25 hPa、1.225 kg/m³，对流层直减率 0.65℃/100m。',h:`<p>标准大气是代表大气平均状态的假想垂直模型，用于高度表校准与飞机性能计算，数值必须照原文记忆。</p>
+<div class="callout tip"><span class="co-t">考点速记</span><b>分层顺序</b>：对流层→平流层→中间层→暖层→散逸层；<b>温度趋势</b>降→升→降→升；对流层高度<b>夏季&gt;冬季、低纬&gt;高纬</b>；巡航层在平流层下部。</div>`,rel:['m1-2','m1-6','m2-1'],src:['AOC气象教材第一分册.doc'],talk:['大气按温度垂直递减率分五层，自下而上是对流层、平流层、中间层、暖层、散逸层。','对流层集中约四分之三大气质量和几乎全部水汽，所有天气现象都发生在这里。','对流层高度夏季高于冬季、低纬高于高纬，中纬约十到十二公里。','平流层下部逆温、水平运动、天气晴朗，是民航巡航层。']},
+{t:'m1-2',m:'m1',ti:'标准大气（ISA）',s:'海平面 15℃、1013.25 hPa、1.225 kg/m³，对流层直减率 0.65℃/100m。',h:`<h4>必背数值</h4><ul><li>海平面：15℃ / 1013.25 hPa / 1.225 kg/m³。</li><li>直减率 0.65℃/100m，11 km 处等温 -56.5℃。</li><li>近似：1 hPa ≈ 27 ft ≈ 8.3 m。</li></ul><p>标准大气是代表大气平均状态的假想垂直模型，用于高度表校准与飞机性能计算，数值必须照原文记忆。</p>
 <div class="stat-grid">
 <div class="stat-box"><div class="num">15℃</div><div class="lab">海平面温度（288.15 K）</div></div>
 <div class="stat-box"><div class="num">1013.25</div><div class="lab">海平面气压 hPa（760 mmHg / 29.92 inHg / 1 atm）</div></div>
@@ -452,7 +504,7 @@ var TOPICS=[
 <li>11000 m 以下直减率 <strong>0.65℃/100m</strong>；11~20 km 等温 -56.5℃；20~30 km 直减率 -0.1℃/100m。</li>
 <li>低空近似：<strong>1 hPa ≈ 27 ft ≈ 8.3 m</strong>；等压面近似高度：850≈1.5 km、700≈3.0 km、500≈5.5 km、300≈9.1 km、200≈11.8 km。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>一套数字：<b>15 / 1013.25 / 1.225 / 0.65℃每百米 / -56.5</b>；1013.25 hPa 同时用于 QNE 与过渡高度层。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>一套数字：<b>15 / 1013.25 / 1.225 / 0.65℃每百米 / -56.5</b>；1013.25 hPa 同时用于 QNE 与过渡高度层。</div>`,rel:['m1-1','m1-3','m1-8'],src:['AOC气象教材第一分册.doc'],talk:['标准大气海平面温度十五摄氏度、气压一千零一十三点二五百帕、密度一点二二五。','对流层直减率为每百米零点六五摄氏度，十一公里处等温零下五十六点五度。','低空可近似为每百帕约二十七英尺。','这组数字是高度表校准和飞机性能计算的基准。']},
 {t:'m1-3',m:'m1',ti:'气压与气压高度基准',s:'气压随高度递减；QFE/QNH/QNE 三种高度表基准对应不同基准面。',h:`<p><strong>气压</strong>是单位面积上大气柱的重量。静力学方程 dp=-ρgdz：气压随高度降低，越往下降得越慢。1 atm=1013.25 hPa=760 mmHg=29.92 inHg。</p>
 <h4>三种高度基准（必背）</h4>
 <div class="tbl-wrap"><table class="tbl">
@@ -467,7 +519,7 @@ var TOPICS=[
 <li>基本形式：低压/低压槽、高压/高压脊、鞍形场；气压梯度 Gn 垂直等压线由高压指向低压，等压线越密梯度越大。</li>
 <li>北半球低压逆时针辐合上升（阴雨），高压顺时针辐散下沉（晴好）。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>QFE=跑道面、QNH=海平面、QNE=标准面；<b>QFE 只在本场报告与俄式 RMK 中，METAR/SPECI 只发 QNH</b>。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>QFE=跑道面、QNH=海平面、QNE=标准面；<b>QFE 只在本场报告与俄式 RMK 中，METAR/SPECI 只发 QNH</b>。</div>`,rel:['m1-2','m3-13','m3-1'],src:['AOC气象教材第一分册.doc'],talk:['气压随高度降低，静力学方程 dp=-ρgdz 描述这一规律。','三种高度基准：场面气压对跑道面、修正海压对平均海平面、标准海压对一千零一十三点二五百帕。','METAR 和 SPECI 只发 QNH，QFE 只在本场或俄式报文中出现。','北半球低压逆时针辐合上升，高压顺时针辐散下沉。']},
 {t:'m1-4',m:'m1',ti:'温度与大气稳定度',s:'干绝热约1℃/100m、湿绝热0.4~0.7℃/100m；与实际直减率比较判断稳定度。',h:`<h4>三种直减率</h4>
 <ul>
 <li><strong>气温直减率 γ（ELR）</strong>：实际大气平均约 0.65℃/100m。</li>
@@ -489,15 +541,15 @@ var TOPICS=[
 <li><strong>下沉逆温</strong>：高压区空气下沉增温；<strong>锋面逆温</strong>：暖空气爬升到冷空气上，多伴低云冻雨；<strong>平流逆温</strong>：暖空气流经冷下垫面。</li>
 </ul>
 <div class="callout warn"><span class="co-t">飞行关联</span>逆温层上下常出现低空急流与风切变，也是雾、霾、低云、冻雨的温床。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>干 1℃/百米、湿 0.4~0.7、实际 0.65；口诀：<b>实际小于湿绝热→绝对稳定；大于干绝热→绝对不稳定；之间→条件性不稳定</b>。</div>`},
-{t:'m1-5',m:'m1',ti:'湿度与水汽',s:'相对湿度随升温下降；露点差接近0易雾；过冷水滴是积冰来源。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>干 1℃/百米、湿 0.4~0.7、实际 0.65；口诀：<b>实际小于湿绝热→绝对稳定；大于干绝热→绝对不稳定；之间→条件性不稳定</b>。</div>`,rel:['m1-5','m2-4','m2-1'],src:['AOC气象教材第一分册.doc'],talk:['三种直减率：实际零点六五、干绝热一、湿绝热零点四到零点七摄氏度每百米。','实际小于湿绝热为绝对稳定，大于干绝热为绝对不稳定，之间为条件性不稳定。','逆温是极强稳定层，常见辐射、下沉、锋面、平流四种。','逆温层上下常出现低空急流和风切变，也是雾和霾的温床。']},
+{t:'m1-5',m:'m1',ti:'湿度与水汽',s:'相对湿度随升温下降；露点差接近0易雾；过冷水滴是积冰来源。',h:`<h4>关键界限</h4><ul><li>露点差 t-td ≤ 2℃ 即可能成雾。</li><li>过冷水滴可低至约 -40℃，是积冰来源。</li><li>-40℃ 以下云中基本全为冰晶。</li></ul><ul>
 <li><strong>相对湿度 f=e/E×100%</strong>：水汽不变时升温则 f 下降、降温则 f 上升，降至 100% 即凝结。</li>
 <li><strong>饱和水汽压 E</strong>仅随温度升高而增大（每升 10℃约翻一倍）。</li>
 <li><strong>露点</strong>：气压不变冷却到饱和的温度；露点差 t-td 越小越潮湿，<strong>t-td≤2℃ 即可能成雾</strong>。</li>
 <li><strong>过冷水滴</strong>：0℃以下仍液态（可低至约 -40℃），是飞机积冰直接来源；-40℃以下云中基本全为冰晶。</li>
 <li>凝结需凝结核（尘埃、盐粒、烟粒）。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>露点差≈0→雾/低云；过冷水滴→积冰；温度越高空气能装的水汽越多。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>露点差≈0→雾/低云；过冷水滴→积冰；温度越高空气能装的水汽越多。</div>`,rel:['m1-4','m2-3','m2-5'],src:['AOC气象教材第一分册.doc'],talk:['相对湿度随升温而下降，饱和水汽压只随温度升高。','露点差接近零度容易成雾，一般两度以内就可能起雾。','过冷水滴可低至零下四十度仍液态，是飞机积冰的直接来源。','零下四十度以下云中基本全是冰晶。']},
 {t:'m1-6',m:'m1',ti:'风与大气环流',s:'风压定理、三圈环流、急流与局地风；急流伴晴空湍流。',h:`<h4>风的受力与类型</h4>
 <ul>
 <li>风向指风的来向，真北为基准；摩擦层指地面至约 1500 m。</li>
@@ -511,7 +563,7 @@ var TOPICS=[
 <li><strong>海陆风</strong>：昼海风、夜陆风；<strong>山谷风</strong>：昼谷风、夜山风。</li>
 <li><strong>焚风</strong>：气流越山下沉增温，背风坡每降 1000 m 升温约 6.5℃。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>风带由赤道向北：信风→西风→极地东风；急流在对流层顶附近、冬季强；顺风增加滑跑距离、逆风缩短。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>风带由赤道向北：信风→西风→极地东风；急流在对流层顶附近、冬季强；顺风增加滑跑距离、逆风缩短。</div>`,rel:['m1-1','m2-6','m2-11'],src:['AOC气象教材第一分册.doc'],talk:['地转风沿等压线吹，北半球背风而立高压在右。','三圈环流由赤道向北是信风带、西风带、极地东风带。','急流风速每秒三十米以上，在对流层顶附近、冬季最强。','急流常伴晴空湍流，局地风有海陆风、山谷风和焚风。']},
 {t:'m1-7',m:'m1',ti:'气团与锋',s:'气团按热力/地理分类；冷锋陡而激烈、暖锋缓而绵长。',h:`<h4>气团</h4>
 <div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:30%"><col style="width:34%"><col style="width:36%"></colgroup>
@@ -530,16 +582,16 @@ var TOPICS=[
 <tr><td><strong>暖锋</strong></td><td>云系 Ci→Cs→As→Ns、锋前连续降水、锋面逆温</td><td>气温上升降水渐止</td></tr>
 <tr><td>静止锋/锢囚锋</td><td>持续低云低能见度/云雨区宽天气复杂</td><td>—</td></tr>
 </table></div>
-<div class="callout danger"><span class="co-t">飞行关联</span>锋区是风切变+颠簸+低云低能见度+积冰的"四合一"风险区；暖锋/静止锋锋面逆温可致<strong>冻雨</strong>。锋面坡度最小的是准静止锋；冷锋雷暴强度大、移动快。</div>`},
-{t:'m1-8',m:'m1',ti:'空气密度与飞行性能',s:'高温高湿低密度使滑跑增长、爬升率下降、载重受限。',h:`<p>由气体状态方程 P=ρR比T：空气密度与气压成正比、与气温成反比，水汽越多密度越小。<strong>高温、高湿、低密度</strong>（高温高原机场）对性能不利。</p>
+<div class="callout danger"><span class="co-t">飞行关联</span>锋区是风切变+颠簸+低云低能见度+积冰的"四合一"风险区；暖锋/静止锋锋面逆温可致<strong>冻雨</strong>。锋面坡度最小的是准静止锋；冷锋雷暴强度大、移动快。</div>`,rel:['m1-4','m2-4','m2-3'],src:['AOC气象教材第一分册.doc','AOC气象教材第二分册.doc'],talk:['气团按热力分四类，影响我国的主要是西伯利亚冷气团和热带太平洋暖气团。','冷气团南下不稳定多积状云，暖气团北上稳定多层状云。','冷锋陡而激烈伴雷暴，暖锋缓而绵长伴连续降水。','锋区是风切变、颠簸、低能见度和积冰的高风险组合区。']},
+{t:'m1-8',m:'m1',ti:'空气密度与飞行性能',s:'高温高湿低密度使滑跑增长、爬升率下降、载重受限。',h:`<h4>性能影响</h4><ul><li>高温高湿低密度 → 滑跑增长、爬升率下降、业载减小。</li><li>逆风缩短滑跑，顺风增加滑跑。</li><li>着陆真空速增大、着陆速度增大。</li></ul><p>由气体状态方程 P=ρR比T：空气密度与气压成正比、与气温成反比，水汽越多密度越小。<strong>高温、高湿、低密度</strong>（高温高原机场）对性能不利。</p>
 <ul>
 <li>起飞滑跑距离增长、爬升率下降。</li>
 <li>着陆真空速增大、着陆速度增大。</li>
 <li>可用业载减小。</li>
 </ul>
 <p>气温三温标：摄氏（冰点0℃、沸点100℃）、华氏（32~212℉）、绝对温标 K（T=t+273.15）。非绝热变化四途径：辐射、乱流、水相变化、传导。气温日变化最低在日出前后、最高在正午约 2 小时后；日较差低纬&gt;高纬、夏&gt;冬、陆&gt;海、晴&gt;阴。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>高温高湿=低密度=滑跑增长/爬升下降/载重减小；逆风缩短滑跑、顺风增加滑跑。</div>`},
-{t:'m1-9',m:'m1',ti:'常用航空气象图表识读',s:'地面图、等压面图与 T-lnP 图的读图要点与等压面高度。',h:`<div class="tbl-wrap"><table class="tbl">
+<div class="callout tip"><span class="co-t">考点速记</span>高温高湿=低密度=滑跑增长/爬升下降/载重减小；逆风缩短滑跑、顺风增加滑跑。</div>`,rel:['m1-2','m4-4','m4-15'],src:['AOC气象教材第一分册.doc','AOC气象教材第三分册.doc'],talk:['空气密度与气压成正比、与气温成反比，水汽越多密度越小。','高温高湿低密度使起飞滑跑增长、爬升率下降、可用业载减小。','逆风缩短滑跑，顺风增加滑跑。','气温日变化最低在日出前后，最高在正午两小时后。']},
+{t:'m1-9',m:'m1',ti:'常用航空气象图表识读',s:'地面图、等压面图与 T-lnP 图的读图要点与等压面高度。',h:`<h4>读图速记</h4><ul><li>850 hPa 约 1500 m、500 hPa 约 5500 m、200 hPa 约 12000 m。</li><li>500 hPa 上以 588 位势什米线代表西太副高。</li><li>风羽读数：短 10 kt、长 20 kt、旗 50 kt。</li></ul><div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
 <tr><th>产品</th><th>要点</th></tr>
 <tr><td><strong>地面图</strong></td><td>等压线每隔 2.5 hPa；高压蓝色 H、低压红色 L；站圈填风/云/天气/温露</td></tr>
@@ -550,7 +602,7 @@ var TOPICS=[
 <li>等压面高度：850≈1500 m、700≈3000 m、500≈5500 m、300≈9000 m、200≈12000 m。</li>
 <li>500 hPa 上以 <strong>588 位势什米</strong>表征西太平洋副热带高压。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>850 看低层风温、500 看环流形势与副高、300/200 看急流；风羽读数 10/20/50 kt。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>850 看低层风温、500 看环流形势与副高、300/200 看急流；风羽读数 10/20/50 kt。</div>`,rel:['m1-6','m4-10','m3-5'],src:['AOC气象教材第一分册.doc','AOC气象教材第二分册.doc'],talk:['地面图看高低压和锋面，等压线每隔二点五百帕。','等压面图看槽脊和急流，五百百帕上用五百八十八位势什米线代表副高。','风羽短羽十节、长羽二十节、三角旗五十节。','T-lnP 图看对流潜势，凝结高度是状态线与露点线交点。']},
 {t:'m2-1',m:'m2',ti:'云的形成与分类',s:'三族14类；积状/层状/波状；云底高度分高、中、低云。',h:`<p>云是悬浮在大气中大量小水滴或小冰晶，凝结或凝华而成，需要水汽上升冷却+凝结核。</p>
 <h4>三族十类</h4>
 <div class="tbl-wrap"><table class="tbl">
@@ -567,7 +619,7 @@ var TOPICS=[
 <li><strong>波状云</strong>：Cs、Ac、Sc 中的波状排列，起伏不大、天气相对平稳。</li>
 </ul>
 <p><strong>特殊指示云</strong>：堡状高积云（Castellanus）预示上午午后可能有雷雨；荚状云（Lenticularis）指示山脉背风波；悬球状云（Mammatus）伴强烈雷暴云底。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>高云三字首字母为 C；<b>低云对起降影响最大</b>；堡状云/悬球状云是坏天气信号。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>高云三字首字母为 C；<b>低云对起降影响最大</b>；堡状云/悬球状云是坏天气信号。</div>`,rel:['m1-4','m2-2','m3-12'],src:['AOC气象教材第二分册.doc'],talk:['云按高度分高、中、低三族，按结构分积状、层状、波状。','高云由冰晶组成不降水，低云对起降影响最大。','积状云垂直发展伴雷暴，层状云水平伸展伴连续降水。','堡状高积云预示午后雷雨，悬球状云伴强雷暴。']},
 {t:'m2-2',m:'m2',ti:'降水与降水强度',s:'降水形态取决于云气温结构；降水量按 mm/d 分级。',h:`<p>降水从云中降落到地面：<strong>雨</strong>（液态）、<strong>雪</strong>（冰晶）、<strong>霰/冰雹</strong>（过冷水冻结）、<strong>毛毛雨</strong>（极小滴）。</p>
 <h4>形态与气温的关系</h4>
 <ul>
@@ -585,7 +637,7 @@ var TOPICS=[
 <tr><td>25~50</td><td>大雨</td><td>大雪 5.0~9.9</td></tr>
 <tr><td>&gt;50</td><td>暴雨</td><td>暴雪 ≥10</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>冻雨=暖层+过冷层；雨幡=蒸发不达地面；暴雨 24h≥50 mm。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>冻雨=暖层+过冷层；雨幡=蒸发不达地面；暴雨 24h≥50 mm。</div>`,rel:['m2-1','m2-3','m1-5'],src:['AOC气象教材第二分册.doc'],talk:['降水形态取决于云气温结构，整层冷则降雪，云下有暖层则降雨。','冻雨是暖层下方再有浅薄过冷层，雨滴落地再冻结，极危险。','雨幡是降水到达地面前就蒸发。','二十四小时降水大于五十毫米为暴雨，大于十毫米为暴雪。']},
 {t:'m2-3',m:'m2',ti:'雾与低能见度',s:'辐射/平流/上坡/锋面/蒸汽雾；t-td≤2℃ 成雾。',h:`<p>雾是接地的水汽凝结，水平能见度＜1 km；霾、轻雾视程≥1 km。</p>
 <h4>五种雾</h4>
 <div class="tbl-wrap"><table class="tbl">
@@ -600,7 +652,7 @@ var TOPICS=[
 <h4>视程障碍八现象</h4>
 <p>雾（FG）、轻雾（BR）、烟（FU）、霾（HZ）、沙暴（SA）、扬沙（SA）、浮尘（DU）、吹雪（BLSN）。<strong>主导能见度</strong>：观测者四周半圈以上（或跑道方向）的最低能见度，约 1.5 m 高观测；<strong>RVR</strong> 在跑道接地区约 2.5 m 高测量。</p>
 <div class="callout warn"><span class="co-t">飞行关联</span>着陆能见度约为主导能见度的 <strong>60%</strong>；RVR 报至最近米，主导能见度报至最近百米。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>辐射雾局地晨发午散；平流雾沿海持久；BR≥1 km、FG&lt;1 km；RVR 单位米。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>辐射雾局地晨发午散；平流雾沿海持久；BR≥1 km、FG&lt;1 km；RVR 单位米。</div>`,rel:['m1-5','m2-2','m3-10'],src:['AOC气象教材第二分册.doc','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['雾是接地凝结、能见度小于一公里，轻雾能见度大于等于一公里。','五种雾：辐射、平流、上坡、锋面、蒸汽。','辐射雾局地晨发午散，平流雾沿海持久。','RVR 在接地区约二点五米高测量，着陆能见度约为主导能见度六成。']},
 {t:'m2-4',m:'m2',ti:'雷暴形成与生命周期',s:'三条件+三阶段；热/地形/锋面三类雷暴；云下有"气压鼻"。',h:`<h4>形成三条件</h4>
 <ul>
 <li>充沛水汽；<strong>不稳定大气</strong>；<strong>抬升触发机制</strong>（地面受热、地形、锋面）。</li>
@@ -621,7 +673,7 @@ var TOPICS=[
 </table></div>
 <p>生命史约 1~1.5 小时。云下出现强冷下沉气流堆，地面形成高压中心，温度突降、气压短时升高后下降，称为<strong>"气压鼻"</strong>。雷击多发生在云顶温度 -10~-20℃ 区域；强下击暴流常出现在成熟阶段消散前。</p>
 <div class="callout danger"><span class="co-t">飞行关联</span>雷暴区应绕飞 <strong>≥20 km</strong>；严禁穿越。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>三条件=水汽+不稳定+抬升；三阶段=积云/成熟/消散；成熟阶段最强；"气压鼻"在云下。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>三条件=水汽+不稳定+抬升；三阶段=积云/成熟/消散；成熟阶段最强；"气压鼻"在云下。</div>`,rel:['m2-5','m4-1','m4-2'],src:['AOC气象教材第二分册.doc','AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf'],talk:['雷暴形成三条件：充沛水汽、不稳定大气、抬升触发。','三类雷暴：热雷暴、地形雷暴、锋面雷暴，锋面雷暴最危险。','三阶段：积云、成熟、消散，成熟阶段最强并出现冰雹和降水。','云下冷下沉堆形成气压鼻，绕飞雷暴至少二十公里。']},
 {t:'m2-5',m:'m2',ti:'飞机积冰',s:'四类积冰；强积冰多出现在-2~-10℃；翼尖先积冰。',h:`<p>积冰发生在云中过冷水滴撞击机体后冻结，需要云中存在 0℃ 以下的过冷水滴。</p>
 <h4>四种积冰</h4>
 <div class="tbl-wrap"><table class="tbl">
@@ -634,7 +686,7 @@ var TOPICS=[
 </table></div>
 <p>强度以每分钟积冰厚度计：轻度 ≤0.6 mm/min、中度 0.6~1.0、重度 &gt;1.0。<strong>强积冰多在温度 -2~-10℃</strong> 的过冷水云中；翼尖与尾翼迎风面先积冰。</p>
 <div class="callout warn"><span class="co-t">飞行关联</span>积冰使升力下降、阻力增大、操纵面卡阻；改出方法为改变高度或航向脱离结冰区（进入温度较高区域）。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>明冰最危险；强积冰温度 -2~-10℃；翼尖先结冰；改出=变高度/航向。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>明冰最危险；强积冰温度 -2~-10℃；翼尖先结冰；改出=变高度/航向。</div>`,rel:['m1-5','m4-5','m4-14'],src:['AOC气象教材第二分册.doc','AC-91-FS-2013-18 低温冰雪运行指南.pdf','地面结冰条件下的运行 AC-121-50-R2.pdf'],talk:['积冰发生在云中过冷水滴撞击机体后冻结。','明冰透明坚硬最危险，雾凇粗糙易脱落，毛冰危害大。','强积冰多出现在零下二到零下十度的过冷水云。','翼尖和尾翼先积冰，改出靠变高度或航向脱离。']},
 {t:'m2-6',m:'m2',ti:'飞机颠簸与尾涡',s:'颠簸强度按载荷因数；尾涡在 3 海里内下降 120-150 m/min。',h:`<p>湍流使飞机产生不规则振颤。乱流分：热力（对流）乱流、动力乱流（地形/风切变）、晴空湍流（急流附近）。</p>
 <h4>颠簸强度（按载荷因数变化 Δn）</h4>
 <div class="tbl-wrap"><table class="tbl">
@@ -645,7 +697,7 @@ var TOPICS=[
 <tr><td>强/严重</td><td>&gt;1.0</td><td>飞机高度姿态突变</td></tr>
 </table></div>
 <p>飞机乱流涡旋尺度约 <strong>15~150 m</strong>；<strong>尾涡</strong>由翼尖拖出，<strong>下降速度约 120~150 m/min</strong>，在航空器后方 3 海里、下方 100~300 ft 形成下洗区，是起飞着陆间隔的依据。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>颠簸按 Δn；尾涡在后方 3 海里、下降 120~150 m/min；CAT 多在急流轴附近。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>颠簸按 Δn；尾涡在后方 3 海里、下降 120~150 m/min；CAT 多在急流轴附近。</div>`,rel:['m1-6','m4-6','m4-2'],src:['AOC气象教材第二分册.doc','AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf'],talk:['颠簸按载荷因数变化分级：轻度零点五以内、中度零点五到一、严重大于一。','热力乱流在对流云区，动力乱流在山背风面，晴空湍流在急流附近。','尾涡由翼尖拖出，下降速度每分钟一百二十到一百五十米。','尾涡在后方三海里形成下洗区，是起降间隔依据。']},
 {t:'m2-7',m:'m2',ti:'低空风切变',s:'四种风切变；强度分级；改出按波音标准保持/增大推力。',h:`<p>风切变指空间两点间风向风速突变；低空风切变指地面至约 1600 ft 之间。</p>
 <h4>四种类型</h4>
 <ul>
@@ -659,7 +711,7 @@ var TOPICS=[
 <li>避免在强切变下强行落地；提前复飞优于勉强着陆。</li>
 </ul>
 <div class="callout danger"><span class="co-t">飞行关联</span>下击暴流中心附近下沉气流可达几十 m/s，是进近阶段事故高发天气。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>四种切变=水平/垂直/锋面/下击暴流；改出=复飞+大推力+带杆。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>四种切变=水平/垂直/锋面/下击暴流；改出=复飞+大推力+带杆。</div>`,rel:['m4-2','m4-3','m2-4'],src:['AOC气象教材第二分册.doc','AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf'],talk:['低空风切变指地面到约一千六百英尺间风向风速突变。','四种类型：水平、垂直、锋面、雷暴下击暴流切变。','下击暴流切变最危险，是进近事故高发天气。','改出程序：立即复飞、保持或增大推力、带杆保持俯仰直到脱离。']},
 {t:'m2-8',m:'m2',ti:'热带气旋（台风）',s:'六等级；形成需暖洋面+地转偏向；命名表 140 个。',h:`<h4>等级（近中心最大持续风速）</h4>
 <div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:30%"><col style="width:35%"><col style="width:35%"></colgroup>
@@ -676,15 +728,15 @@ var TOPICS=[
 <li>海温 ≥26.5℃；纬度 ≥5°（需地转偏向力）；弱垂直风切变；初始扰动。</li>
 </ul>
 <p>命名由西北太平洋 14 国/地区各提供 10 个共 140 个循环使用。台风眼区微风晴朗、眼墙风雨最烈。警报分级：热带气旋警报、台风警报、紧急台风警报。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>海温≥26.5℃、纬度≥5°；命名 140 个；眼墙最危险。</div>`},
-{t:'m2-9',m:'m2',ti:'寒潮与地面大风',s:'24/48/72h 降温标准；三个源地、四个路径。',h:`<p>寒潮是强冷空气大规模南下。我国规定：<strong>24h 降温 ≥8℃ 或 48h≥10℃ 或 72h≥12℃</strong>，且最低气温 ≤4℃。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>海温≥26.5℃、纬度≥5°；命名 140 个；眼墙最危险。</div>`,rel:['m4-7','m2-11','m5-8'],src:['AOC气象教材第二分册.doc'],talk:['热带气旋按近中心风速分六档，从热带低压到超强台风。','形成需海温大于等于二十六点五度、纬度大于等于五度。','命名表一百四十个名字循环使用，眼墙风雨最烈。','北半球右半圆为危险半圆，风速叠加。']},
+{t:'m2-9',m:'m2',ti:'寒潮与地面大风',s:'24/48/72h 降温标准；三个源地、四个路径。',h:`<h4>降温标准</h4><ul><li>24h ≥ 8℃ 或 48h ≥ 10℃ 或 72h ≥ 12℃。</li><li>且最低气温 ≤ 4℃。</li><li>地面风力 ≥ 8 级为大风。</li></ul><p>寒潮是强冷空气大规模南下。我国规定：<strong>24h 降温 ≥8℃ 或 48h≥10℃ 或 72h≥12℃</strong>，且最低气温 ≤4℃。</p>
 <ul>
 <li><strong>三个源地</strong>：新地岛以北、以西；冰岛以南；喀拉海以东。冷空气经蒙古进入我国前汇聚于<strong>关键区</strong>（约 40~55°N、80~100°E）。</li>
 <li><strong>四个路径</strong>：西路、中路、东路、东路加西路。</li>
 </ul>
 <p>大风：地面风力 ≥8 级为大风；寒潮常伴偏北大风、沙尘暴与剧烈降温。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>24h≥8/48h≥10/72h≥12 且最低≤4℃；三个源地、关键区、四个路径。</div>`},
-{t:'m2-10',m:'m2',ti:'沙尘暴与火山灰',s:'扬沙/沙暴；火山灰由 VAAC 发布，9 个 VAAC。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>24h≥8/48h≥10/72h≥12 且最低≤4℃；三个源地、关键区、四个路径。</div>`,rel:['m1-7','m2-10','m2-3'],src:['AOC气象教材第二分册.doc'],talk:['寒潮指二十四小时降温八度以上、或四十八小时十度、或七十二小时十二度，且最低温不高于四度。','三个源地冷空气在关键区汇聚后入侵我国。','四个路径：西路、中路、东路、东路加西路。','寒潮常伴偏北大风和沙尘暴。']},
+{t:'m2-10',m:'m2',ti:'沙尘暴与火山灰',s:'扬沙/沙暴；火山灰由 VAAC 发布，9 个 VAAC。',h:`<h4>能见度与 VAAC</h4><ul><li>扬沙 1~10 km、沙暴 &lt;1 km、浮尘 &lt;10 km。</li><li>全球 9 个 VAAC。</li><li>颜色代码：红/琥珀/绿。</li></ul><ul>
 <li><strong>扬沙</strong>：大风将地面沙尘卷起，水平能见度 1~10 km；<strong>沙尘暴</strong>：能见度 &lt;1 km。</li>
 <li><strong>浮尘</strong>：无风或微风时沙尘悬浮，能见度 &lt;10 km。</li>
 </ul>
@@ -695,15 +747,15 @@ var TOPICS=[
 <li>火山灰浓度分级：低/中/高。</li>
 </ul>
 <div class="callout danger"><span class="co-t">飞行关联</span>遇火山灰立即改变高度/航向脱离，避免吸入发动机。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>沙暴能见度&lt;1 km；9 个 VAAC；英航 B747 加隆贡案例；颜色代码红/琥珀/绿。</div>`},
-{t:'m2-11',m:'m2',ti:'高空重要天气系统',s:'副高 588、槽线切变线、ITCZ、阻塞高压对飞行的影响。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>沙暴能见度&lt;1 km；9 个 VAAC；英航 B747 加隆贡案例；颜色代码红/琥珀/绿。</div>`,rel:['m4-8','m5-8','m3-11'],src:['AOC气象教材第二分册.doc'],talk:['扬沙能见度一到十公里，沙尘暴小于一公里，浮尘小于十公里。','火山灰吸入喷气发动机后熔堵涡轮，危害极大。','全球设九个火山灰咨询中心，发布颜色代码红、琥珀、绿。','经典案例是英航 B747 飞入加隆贡火山灰云四发停车。']},
+{t:'m2-11',m:'m2',ti:'高空重要天气系统',s:'副高 588、槽线切变线、ITCZ、阻塞高压对飞行的影响。',h:`<h4>系统要点</h4><ul><li>副高 588 线、切变线连阴雨、ITCZ 辐合、阻高持续。</li><li>副高内部晴热、西侧多雷阵雨。</li></ul><ul>
 <li><strong>西太平洋副热带高压</strong>：500 hPa 上以 588 位势什米线代表其范围，夏季北跳影响我国主雨带；副高内部下沉晴热，西侧多雷阵雨。</li>
 <li><strong>槽线与切变线</strong>：槽线为低压槽中等压线曲率最大处连线；切变线为风向/风速不连续线，是我国东部夏季连阴雨的关键系统。</li>
 <li><strong>热带辐合带 ITCZ</strong>：南北半球信风辐合带，对流旺盛，是台风胚胎源地。</li>
 <li><strong>阻塞高压</strong>：中高纬稳定暖高压，使天气持续异常（长时间连阴雨或晴热）。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>588=副高；切变线连阴雨；ITCZ 在赤道辐合；阻塞高压使天气持久。</div>`},
-{t:'m3-1',m:'m3',ti:'观测系统与地面观测',s:'自动观测+人工观测；观测项目分六类。',h:`<p>航空气象观测由<strong>自动气象观测系统（AWOS/AMOS）</strong>为主，辅以人工观测。观测项目：风向风速、气压、气温、露点、湿度、云、能见度、天气现象、降水与跑道视程 RVR。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>588=副高；切变线连阴雨；ITCZ 在赤道辐合；阻塞高压使天气持久。</div>`,rel:['m1-9','m2-8','m2-4'],src:['AOC气象教材第二分册.doc'],talk:['西太平洋副高在五百百帕上以五百八十八位势什米线为代表。','切变线是风向风速不连续线，是我国东部夏季连阴雨的关键系统。','热带辐合带是南北半球信风辐合带，是台风胚胎源地。','阻塞高压使天气持续异常。']},
+{t:'m3-1',m:'m3',ti:'观测系统与地面观测',s:'自动观测+人工观测；观测项目分六类。',h:`<h4>观测项目</h4><ul><li>风：2 分钟平均，阵风 10 秒极值。</li><li>云量 FEW/SCT/BKN/OVC + 云高百尺 + 类型 CB/TCU。</li><li>RVR 单位米，QNH 为 METAR 唯一气压组。</li></ul><p>航空气象观测由<strong>自动气象观测系统（AWOS/AMOS）</strong>为主，辅以人工观测。观测项目：风向风速、气压、气温、露点、湿度、云、能见度、天气现象、降水与跑道视程 RVR。</p>
 <div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
 <tr><th>项目</th><th>说明</th></tr>
@@ -714,7 +766,7 @@ var TOPICS=[
 <tr><td>气压</td><td>QNH（hPa）、QFE（仅本场/俄式 RMK）</td></tr>
 <tr><td>温度露点</td><td>℃，零下加 M；能见度 9999 表示 ≥10 km</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>风为 2 分钟平均；RVR 单位米；QNH 是 METAR 唯一气压组。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>风为 2 分钟平均；RVR 单位米；QNH 是 METAR 唯一气压组。</div>`,rel:['m3-2','m5-3','m3-12'],src:['民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf','国际气象报文识读.pptx'],talk:['地面观测以自动气象观测系统为主、人工为辅。','观测项目含风、气压、温露、云、能见度、天气现象、降水和 RVR。','风报两分钟平均，阵风为十秒极值。','METAR 只发 QNH，能见度九九九九代表大于等于十公里。']},
 {t:'m3-2',m:'m3',ti:'METAR/SPECI 报文结构',s:'六段式：报头+风+能见度+天气+云+温露/气压/趋势。',h:`<p><strong>METAR</strong> 为例行日常天气报告（每半小时/每小时），<strong>SPECI</strong> 为特殊天气报告（达到阈值随时发布）。</p>
 <div class="code">ZBAA 080000Z 24008G14MPS 4000 -RA FEW033 BKN060 18/12 Q1015 NOSIG=</div>
 <h4>六段拆解</h4>
@@ -728,7 +780,7 @@ var TOPICS=[
 <tr><td>云</td><td><code>FEW033 BKN060</code></td><td>少云 3300 ft、多云 6000 ft</td></tr>
 <tr><td>温露/气压/趋势</td><td><code>18/12 Q1015 NOSIG</code></td><td>气温 18℃ 露点 12℃、QNH 1015 hPa、无显著变化</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>顺序固定：<b>风→能见度→天气→云→温露→气压→趋势</b>；时组 Z 为 UTC；趋势 NOSIG/BECMG/TEMPO。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>顺序固定：<b>风→能见度→天气→云→温露→气压→趋势</b>；时组 Z 为 UTC；趋势 NOSIG/BECMG/TEMPO。</div>`,rel:['m3-1','m3-9','m3-11'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['METAR 例行、SPECI 特殊，报文按六段固定顺序排列。','顺序是风、能见度、天气、云、温露、气压、趋势。','时组 Z 代表世界时，趋势组有 NOSIG、BECMG、TEMPO。','读懂六段就能拆解绝大多数例行报文。']},
 {t:'m3-3',m:'m3',ti:'TAF 航站预报',s:'按有效期发趋势；FM/BECMG/TEMPO/PROB 组管理变化。',h:`<p><strong>TAF</strong> 为机场着陆区 5 km 半径内的定时预报，有效期 9~30 h。</p>
 <div class="code">TAF ZBAA 080000Z 0800/0906 24008G14MPS 4000 -RA BKN060 TX20/0800Z TN11/0812Z TEMPO 0803/0808 1200 +RA=</div>
 <h4>变化指示组</h4>
@@ -742,8 +794,8 @@ var TOPICS=[
 <tr><td><code>INTER hhhh</code></td><td>短时波动，每次≤30 分钟</td></tr>
 <tr><td><code>TX/TN</code></td><td>最高/最低气温及时间</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>FM=完全改、BECMG=渐改、TEMPO=短时、PROB=概率；TAF 时效 9~30 h。</div>`},
-{t:'m3-4',m:'m3',ti:'重要天气情报 SIGMET/AIRMET',s:'SIGMET 危险天气；AIRMET 中度不利天气；WS/WV/R 开头。',h:`<div class="tbl-wrap"><table class="tbl">
+<div class="callout tip"><span class="co-t">考点速记</span>FM=完全改、BECMG=渐改、TEMPO=短时、PROB=概率；TAF 时效 9~30 h。</div>`,rel:['m3-2','m5-6','mr-1'],src:['国际气象报文识读.pptx','民用航空气象预报规范 AP-117-TM-2019-01.pdf','关于 TAF AMD 的理解.docx'],talk:['TAF 是机场着陆区五公里半径的定时预报，时效九到三十小时。','FM 表示从某时起完全改变，BECMG 表示时段内逐渐变化。','TEMPO 是短时波动，每次不超过一小时，PROB 表示发生概率。','TX 和 TN 给出最高最低气温及时间。']},
+{t:'m3-4',m:'m3',ti:'重要天气情报 SIGMET/AIRMET',s:'SIGMET 危险天气；AIRMET 中度不利天气；WS/WV/R 开头。',h:`<h4>前缀含义</h4><ul><li>WS 一般危险天气、WV 火山灰、WR 热带气旋。</li><li>SIGMET ≤ 4 h，CNL 取消。</li></ul><div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:22%"><col style="width:78%"></colgroup>
 <tr><th>类型</th><th>范围与内容</th></tr>
 <tr><td><strong>SIGMET</strong></td><td>航路区域危险天气：雷暴、强烈颠簸、强烈积冰、严重山地波、火山灰、热带气旋。以 <code>WS</code>（非气旋）、<code>WV</code>（火山灰）、<code>WR</code>（热带气旋）开头，时限 ≤4 h</td></tr>
@@ -753,24 +805,24 @@ var TOPICS=[
 <li>时组为 UTC，如 <code>081200Z</code>；<code>CNL</code> 表示取消先前发布。</li>
 <li>有效时段 <code>hhmm/hhmm</code>；超出即发新报文。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>WS=一般 SIGMET、WV=火山灰、WR=热带气旋；CNL=取消；时限≤4 h。</div>`},
-{t:'m3-5',m:'m3',ti:'高空风温与重要天气预报图',s:'风羽读数；重要天气用符号。',h:`<p><strong>高空风温预报图</strong>（WINTEM）给出等压面位势高度、温度与风：风羽长羽 20 kt、短羽 10 kt、三角旗 50 kt，风杆指向风去方向。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>WS=一般 SIGMET、WV=火山灰、WR=热带气旋；CNL=取消；时限≤4 h。</div>`,rel:['m3-8','m5-7','m5-8'],src:['国际气象报文识读.pptx','民用航空气象预报规范 AP-117-TM-2019-01.pdf','附件3第21版本中文.pdf'],talk:['SIGMET 发布航路危险天气，时限不超过四小时。','以 WS、WV、WR 开头，分别对应一般、火山灰、热带气旋。','AIRMET 发布中度不利天气，如中度颠簸和积冰。','CNL 表示取消先前发布，超出时效发新报文。']},
+{t:'m3-5',m:'m3',ti:'高空风温与重要天气预报图',s:'风羽读数；重要天气用符号。',h:`<h4>风羽读数</h4><ul><li>短羽 10 kt、长羽 20 kt、三角旗 50 kt。</li><li>风杆指向风的去向。</li></ul><p><strong>高空风温预报图</strong>（WINTEM）给出等压面位势高度、温度与风：风羽长羽 20 kt、短羽 10 kt、三角旗 50 kt，风杆指向风去方向。</p>
 <p><strong>重要天气预报图</strong>（SWH）用符号标注雷暴、积冰、颠簸、急流、云顶。常见符号：实线雷暴区、点线雷暴区、积冰区斜线、颠簸区曲线。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>风羽 10/20/50 kt；风杆指向去向；SWH 看积冰颠簸雷暴区。</div>`},
-{t:'m3-6',m:'m3',ti:'机载气象雷达',s:'衰减识别硬云；倾角与距离圈调节。',h:`<p>机载雷达探测前方降水粒子，硬云/雷暴回波强。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>风羽 10/20/50 kt；风杆指向去向；SWH 看积冰颠簸雷暴区。</div>`,rel:['m1-9','m3-8','m4-6'],src:['国际气象报文识读.pptx','民用航空气象预报规范 AP-117-TM-2019-01.pdf'],talk:['高空风温预报图给出等压面高度、温度和风。','风羽长羽二十节、短羽十节、三角旗五十节，风杆指向风去方向。','重要天气预报图用符号标注雷暴、积冰、颠簸和急流区。','风杆指向与风向来向相反，读数要特别注意。']},
+{t:'m3-6',m:'m3',ti:'机载气象雷达',s:'衰减识别硬云；倾角与距离圈调节。',h:`<h4>使用要点</h4><ul><li>衰减模式辨硬云；调倾角避地杂波。</li><li>距离圈 20/40/80/160 海里。</li><li>上风方向绕飞 ≥20 km。</li></ul><p>机载雷达探测前方降水粒子，硬云/雷暴回波强。</p>
 <ul>
 <li><strong>正常模式</strong>探测前方；<strong>衰减模式</strong>用于识别硬云（强回波后衰减穿透差）。</li>
 <li>通过调节天线<strong>倾角</strong>避免地面杂波；距离圈选择 20/40/80/160 海里。</li>
 <li>绕飞雷暴应从<strong>上风方向</strong>绕飞 ≥20 km；不要从云下或云间穿越。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>衰减模式辨硬云；绕飞≥20 km；避开云下。</div>`},
-{t:'m3-7',m:'m3',ti:'飞行情报服务 ATIS/VOLMET',s:'ATIS 机场自动情报；VOLMET 航路对空气象广播。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>衰减模式辨硬云；绕飞≥20 km；避开云下。</div>`,rel:['m4-1','m2-4','m3-8'],src:['AOC气象教材第三分册.doc','AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf'],talk:['机载气象雷达探测前方降水粒子，硬云和雷暴回波最强。','衰减模式用于识别硬云，因强回波后信号衰减。','通过调节天线倾角避开地面杂波，距离圈可选二十到一百六十海里。','绕飞雷暴应从上风方向绕至少二十公里。']},
+{t:'m3-7',m:'m3',ti:'飞行情报服务 ATIS/VOLMET',s:'ATIS 机场自动情报；VOLMET 航路对空气象广播。',h:`<h4>两类广播</h4><ul><li>ATIS：本场自动情报，字母 A-Z 编号。</li><li>VOLMET：航路对空广播，按表守听。</li></ul><ul>
 <li><strong>ATIS</strong>：自动终端情报服务，录音循环播报本场频率、跑道、天气、过渡高度；每小时或变化时更新，以字母编号（A-Z）。</li>
 <li><strong>VOLMET</strong>：航路对空气象广播，按区域在高频/甚高频频段循环播报 METAR/TAF。</li>
 <li>频率：中波 ATIS 多为本地调频；VOLMET 按区域时间表守听。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>ATIS 字母编号逐次递增；VOLMET 按时间表守听；进近前必须收听 ATIS。</div>`},
-{t:'m3-8',m:'m3',ti:'航空气象产品体系',s:'观测/预报/警报/咨询四大类。',h:`<div class="tbl-wrap"><table class="tbl">
+<div class="callout tip"><span class="co-t">考点速记</span>ATIS 字母编号逐次递增；VOLMET 按时间表守听；进近前必须收听 ATIS。</div>`,rel:['m3-8','m5-11','m4-10'],src:['国际气象报文识读.pptx','民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf'],talk:['ATIS 是自动终端情报服务，录音循环播报本场频率、跑道和天气。','ATIS 以字母编号逐次递增，每小时或天气变化时更新。','VOLMET 是航路对空气象广播，按区域时间表守听。','进近前必须收听目的地 ATIS。']},
+{t:'m3-8',m:'m3',ti:'航空气象产品体系',s:'观测/预报/警报/咨询四大类。',h:`<h4>四大类</h4><ul><li>观测：METAR/SPECI、雷达、卫星。</li><li>预报：TAF、高空图、SWH。</li><li>警报：SIGMET/AIRMET。</li><li>咨询：飞行讲解、VAAC。</li></ul><div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:24%"><col style="width:76%"></colgroup>
 <tr><th>类别</th><th>产品</th></tr>
 <tr><td>观测</td><td>METAR/SPECI、机场天气报告、雷达回波、卫星云图</td></tr>
@@ -778,7 +830,7 @@ var TOPICS=[
 <tr><td>警报</td><td>SIGMET、AIRMET、台风/火山灰警报、风切变警报</td></tr>
 <tr><td>咨询</td><td>飞行前讲解、飞行中咨询、VAAC 火山灰咨询</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>观测用过去时、预报用将来时；警报针对危险天气。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>观测用过去时、预报用将来时；警报针对危险天气。</div>`,rel:['m3-4','m3-7','m5-4'],src:['国际气象报文识读.pptx','民用航空气象预报规范 AP-117-TM-2019-01.pdf','民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf'],talk:['航空气象产品分观测、预报、警报、咨询四大类。','观测用过去时，预报用将来时，警报针对危险天气。','观测含 METAR、雷达、卫星云图；预报含 TAF 和高空图。','警报含 SIGMET、AIRMET、台风和火山灰警报。']},
 {t:'mr-1',m:'m3',ti:'RMK 注释组',s:'RMK 起注释：SLP/6组/温度组/Z/RERA/PRESFR 等。',h:`<p><code>RMK</code> 起为自由注释，供飞行与预报员参考，不强制格式。常见注释组：</p>
 <h4>气压与趋势</h4>
 <ul>
@@ -804,8 +856,8 @@ var TOPICS=[
 <li><code>CB ALQDS/CB DSNT</code>：云底四方/远处有积雨云。</li>
 <li><code>LTG</code>：雷电。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>RMK 起注释；SLP 海平面气压；RERA 跑道湿；T 组给精确温露点；Z=自动观测。</div>`},
-{t:'m3-9',m:'m3',ti:'风组细化规则',s:'00000/VRB/190V270/阵风/VRB02MPS 的读法。',h:`<div class="tbl-wrap"><table class="tbl">
+<div class="callout tip"><span class="co-t">考点速记</span>RMK 起注释；SLP 海平面气压；RERA 跑道湿；T 组给精确温露点；Z=自动观测。</div>`,rel:['m3-2','m3-13','m3-14'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['RMK 起为自由注释，不强制格式，供飞行和预报员参考。','SLP 组给出海平面气压，PRESFR 和 PRESRR 表示气压快升快降。','RERA 表示刚下过雨跑道湿，SNOCLO 表示跑道积雪关闭。','T 组给出精确温露点，Z 表示自动观测。']},
+{t:'m3-9',m:'m3',ti:'风组细化规则',s:'00000/VRB/190V270/阵风/VRB02MPS 的读法。',h:`<h4>风组读法</h4><ul><li>00000=静风，VRB=风向不定。</li><li>G=阵风，V=风向摆动。</li><li>1 m/s ≈ 1.94 kt。</li></ul><div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
 <tr><th>写法</th><th>含义</th></tr>
 <tr><td><code>24008MPS</code></td><td>风向 240°，风速 8 m/s</td></tr>
@@ -816,8 +868,8 @@ var TOPICS=[
 <tr><td><code>9999</code></td><td>非风组；能见度 ≥10 km</td></tr>
 </table></div>
 <p>风单位：<code>KT</code>=节、<code>MPS</code>=米/秒、<code>KMH</code>=千米/时；1 m/s≈1.94 kt。阵风 G 后为最大 10 秒平均。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>00000=静风；VRB=风向不定；V 组风向摆动；G=阵风。</div>`},
-{t:'m3-10',m:'m3',ti:'能见度与 RVR 组',s:'9999/CAVOK/R18L/0/9999V 的读法。',h:`<div class="tbl-wrap"><table class="tbl">
+<div class="callout tip"><span class="co-t">考点速记</span>00000=静风；VRB=风向不定；V 组风向摆动；G=阵风。</div>`,rel:['m3-2','m3-1','m3-14'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）'],talk:['风组五位数字前三位风向、后两位风速，单位 KT 或 MPS。','零零零零零表示静风，VRB 表示风向不定。','G 后为阵风最大值，V 组表示风向在两方位间摆动。','风向摆动只有在变化大于等于六十度且风速大于等于三节时才报告。']},
+{t:'m3-10',m:'m3',ti:'能见度与 RVR 组',s:'9999/CAVOK/R18L/0/9999V 的读法。',h:`<h4>CAVOK 三条件</h4><ul><li>能见度 ≥10 km。</li><li>无 5000 ft 以下云。</li><li>无重要天气。</li></ul><div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
 <tr><th>写法</th><th>含义</th></tr>
 <tr><td><code>9999</code></td><td>主导能见度 ≥10 km</td></tr>
@@ -831,7 +883,7 @@ var TOPICS=[
 <li>RVR 报至最近 25 m（&lt;800）或最近 50 m（≥800）；最大 1500 m 报 <code>P1500</code>，最小 &lt;50 报 <code>M0050</code>。</li>
 <li>主导能见度报至最近百米；&lt;800 报米。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>CAVOK 三条件；RVR 单位米；D=下降/U=上升。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>CAVOK 三条件；RVR 单位米；D=下降/U=上升。</div>`,rel:['m3-2','m3-12','m4-4'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['九九九九表示主导能见度大于等于十公里。','CAVOK 需同时满足能见度大于十公里、无五千英尺以下云、无重要天气。','R 组给出具体跑道视程，D 下降、U 上升、N 无变化。','RVR 报至最近二十五米或五十米，超出报 P 一千五百。']},
 {t:'m3-11',m:'m3',ti:'现在天气组（W'+'W）',s:'现象+强度/描述词+降水/视程障碍三列组合。',h:`<p>现在天气组最多 3 组，按"强度/描述+现象"组合。</p>
 <h4>强度与描述词（前缀）</h4>
 <ul>
@@ -847,8 +899,8 @@ var TOPICS=[
 <li><code>BR</code> 轻雾、<code>FG</code> 雾、<code>FU</code> 烟、<code>HZ</code> 霾、<code>DU</code> 浮尘、<code>SA</code> 沙、<code>VA</code> 火山灰、<code>DU/SA</code> 扬沙沙暴。</li>
 </ul>
 <p>示例：<code>-DZ</code> 小毛毛雨、<code>+SHRA</code> 强阵雨、<code>FZRA</code> 冻雨、<code>BCFG</code> 碎雾、<code>BLSA</code> 高吹沙。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>前缀强度+描述，后接现象；SH=阵性、FZ=冻、TS=雷暴。</div>`},
-{t:'m3-12',m:'m3',ti:'云组',s:'FEW/SCT/BKN/OVC/NSC/NCD/VV/CB/TCU 的量与高。',h:`<div class="tbl-wrap"><table class="tbl">
+<div class="callout tip"><span class="co-t">考点速记</span>前缀强度+描述，后接现象；SH=阵性、FZ=冻、TS=雷暴。</div>`,rel:['m3-2','m3-14','m2-3'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）'],talk:['现在天气组按强度或描述词加现象组合。','负号轻、正号强、无符号中；描述词有浅、碎、低吹、高吹、阵性、雷暴、冻。','降水现象有毛毛雨、雨、雪、冰粒、冰雹、霰。','视程障碍有轻雾、雾、烟、霾、浮尘、沙、火山灰。']},
+{t:'m3-12',m:'m3',ti:'云组',s:'FEW/SCT/BKN/OVC/NSC/NCD/VV/CB/TCU 的量与高。',h:`<h4>云量档位</h4><ul><li>FEW 1-2、SCT 3-4、BKN 5-7、OVC 8。</li><li>云高 = 百尺 AGL，CB/TCU 必报。</li></ul><div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:22%"><col style="width:30%"><col style="width:48%"></colgroup>
 <tr><th>组</th><th>云量</th><th>含义</th></tr>
 <tr><td><code>FEW</code></td><td>1~2/8</td><td>少云</td></tr>
@@ -864,8 +916,8 @@ var TOPICS=[
 <li>附加类型：<code>CB</code> 积雨云、<code>TCU</code> 浓积云，必报。</li>
 <li>最多报 5 层；最低若干层低于 5000 ft 或为 CB/TCU 必须报。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>FEW1-2/SCT3-4/BKN5-7/OVC8；云高=百尺；CB/TCU 必报。</div>`},
-{t:'m3-13',m:'m3',ti:'温度露点与 QNH 组',s:'M02/10/02、Q1013、NOSIG/BECMG/TEMPO/PROB30/INTER。',h:`<div class="tbl-wrap"><table class="tbl">
+<div class="callout tip"><span class="co-t">考点速记</span>FEW1-2/SCT3-4/BKN5-7/OVC8；云高=百尺；CB/TCU 必报。</div>`,rel:['m3-2','m2-1','m3-1'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['云量分 FEW 一到二、SCT 三到四、BKN 五到七、OVC 八分之八。','云高单位是百尺，FEW 零三三即云底三千三百英尺。','CB 和 TCU 必须报告，最多报五层。','NSC 无重要云、NCD 无云、VV 表示云底不可见。']},
+{t:'m3-13',m:'m3',ti:'温度露点与 QNH 组',s:'M02/10/02、Q1013、NOSIG/BECMG/TEMPO/PROB30/INTER。',h:`<h4>温露与气压</h4><ul><li>M02 = -2℃；Q1015 = 1015 hPa。</li><li>A2992 = 29.92 inHg。</li><li>NOSIG 仅 2 小时。</li></ul><div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:26%"><col style="width:74%"></colgroup>
 <tr><th>写法</th><th>含义</th></tr>
 <tr><td><code>18/12</code></td><td>气温 18℃，露点 12℃</td></tr>
@@ -879,7 +931,7 @@ var TOPICS=[
 <tr><td><code>INTER 0812/0814</code></td><td>短时波动（≤30 min）</td></tr>
 </table></div>
 <p>零下温度用 <code>M</code> 前缀（M02=-2℃）；QNH 三位或四位 hPa，美式用英寸汞柱。趋势组在 METAR 末两位时效，TAF 用 FM/BECMG/TEMPO/PROB。</p>
-<div class="callout tip"><span class="co-t">考点速记</span>M=零下；Q=QNH；NOSIG 仅 2 小时；PROB30/40 概率。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>M=零下；Q=QNH；NOSIG 仅 2 小时；PROB30/40 概率。</div>`,rel:['m3-2','m1-3','mr-1'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）'],talk:['温露点组两位数斜杠分隔，零下用 M 前缀。','Q 后四位为 QNH，美式用 A 加四位英寸汞柱。','NOSIG 表示未来两小时无显著变化。','趋势组在 METAR 末，TAF 用 FM、BECMG、TEMPO、PROB。']},
 {t:'m3-14',m:'m3',ti:'报文缩略语词素表（212 条）',s:'解码器词表：报类、云量、天气、风、能见度、预报组。',h:`<p>本词表由 212 条 ICAO 缩略语整理，供解码器匹配与识读练习。</p>
 <h4>报类与时组</h4>
 <div class="tbl-wrap"><table class="tbl">
@@ -943,7 +995,7 @@ var TOPICS=[
 <tr><td>WS/WV/WR</td><td>SIGMET/火山灰/热带气旋</td></tr>
 <tr><td>ATIS/VOLMET</td><td>机场自动情报/航路广播</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>词表按"报类/云量/天气/风/能见度/气压温度"分组记忆；解码器按 token 长度匹配。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>词表按"报类/云量/天气/风/能见度/气压温度"分组记忆；解码器按 token 长度匹配。</div>`,rel:['m3-11','m3-9','mr-1'],src:['民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）','国际气象报文识读.pptx'],talk:['词表按报类、云量、天气、风、能见度、气压温度分组记忆。','报类有 METAR、SPECI、TAF，变化组有 FM、BECMG、TEMPO、PROB。','天气现象由描述词加现象组成，如 SHRA 阵雨、FZRA 冻雨。','解码器按词素长度匹配，先匹配长词素。']},
 {t:'m4-1',m:'m4',ti:'雷暴',s:'三阶段；绕飞≥20 km；成熟阶段最危险。',h:`<p>雷暴是飞行中最危险的天气之一：伴随强颠簸、积冰、下击暴流、冰雹与雷击。</p>
 <h4>对飞行的危害</h4>
 <ul>
@@ -960,15 +1012,15 @@ var TOPICS=[
 <tr><td>消散</td><td>下沉</td><td>仍有下沉气流与风切变</td></tr>
 </table></div>
 <div class="callout danger"><span class="co-t">运行要点</span>绕飞雷暴上风方向 ≥20 km；严禁穿越；机载雷达用于定位回波强中心。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>三条件水汽+不稳定+抬升；成熟阶段最强；绕飞≥20 km。</div>`},
-{t:'m4-2',m:'m4',ti:'下击暴流',s:'强下沉气流；直径4-40 km；对起飞进近最危险。',h:`<p>下击暴流是雷暴云下的强下沉气流，到达地面后向外扩散，造成低空风切变。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>三条件水汽+不稳定+抬升；成熟阶段最强；绕飞≥20 km。</div>`,rel:['m2-4','m4-2','m3-6'],src:['AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf','AOC气象教材第三分册.doc'],talk:['雷暴伴强颠簸、积冰、冰雹、雷击和下击暴流。','成熟阶段上升下沉共存最危险，应绕飞至少二十公里。','严禁穿越雷暴，机载雷达用于定位回波强中心。','消散阶段仍有下沉气流和风切变，不能掉以轻心。']},
+{t:'m4-2',m:'m4',ti:'下击暴流',s:'强下沉气流；直径4-40 km；对起飞进近最危险。',h:`<h4>识别与改出</h4><ul><li>微下击暴流 &lt;4 km，下沉 10~30 m/s。</li><li>征兆：缩尾、强降雨、温降、气压鼻。</li><li>改出：复飞 + 大推力 + 带杆。</li></ul><p>下击暴流是雷暴云下的强下沉气流，到达地面后向外扩散，造成低空风切变。</p>
 <ul>
 <li>微下击暴流直径 &lt;4 km，下沉速度可达 10~30 m/s；</li>
 <li>宏下击暴流直径 4~40 km；</li>
 <li>典型危害：进近中先遇顺风→升力下降→飞行员加油门→下沉气流突至→触地。</li>
 </ul>
 <div class="callout danger"><span class="co-t">运行要点</span>识别征兆：云底缩尾状下垂、地面强降雨、温度骤降、气压鼻。改出=复飞+大推力+带杆。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>微下击暴流&lt;4 km；下沉 10~30 m/s；进近阶段最危险。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>微下击暴流&lt;4 km；下沉 10~30 m/s；进近阶段最危险。</div>`,rel:['m2-7','m4-1','m4-3'],src:['AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf','AOC气象教材第三分册.doc'],talk:['下击暴流是雷暴云下强下沉气流，触地后向外扩散。','微下击暴流直径小于四公里，下沉速度每秒十到三十米。','典型危害是进近中先遇顺风后突遇下沉气流导致触地。','识别征兆有云底缩尾下垂、强降雨、温度骤降和气压鼻。']},
 {t:'m4-3',m:'m4',ti:'低空风切变',s:'四种类型；进近改出程序。',h:`<p>地面至 1600 ft 间风向风速突变。</p>
 <h4>类型</h4>
 <ul>
@@ -981,8 +1033,8 @@ var TOPICS=[
 <li>带杆至 VREF+适当姿态，保持俯仰直到脱离切变；</li>
 <li>避免在强切变下勉强着陆。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>四种切变；改出=复飞+TOGA+带杆；1600 ft 以下。</div>`},
-{t:'m4-4',m:'m4',ti:'低能见度运行',s:'VIS/RVR 分级；低能见度程序 LVP。',h:`<p>低能见度是进近着陆主要威胁。按 RVR 决定运行等级。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>四种切变；改出=复飞+TOGA+带杆；1600 ft 以下。</div>`,rel:['m2-7','m4-2','m4-11'],src:['AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf','AOC气象教材第三分册.doc'],talk:['低空风切变在地面到一千六百英尺间最危险。','识别靠多普勒雷达告警和空速高度突变。','改出立即复飞，保持或增大推力至 TOGA。','带杆至 VREF 加适当姿态，避免在强切变下勉强着陆。']},
+{t:'m4-4',m:'m4',ti:'低能见度运行',s:'VIS/RVR 分级；低能见度程序 LVP。',h:`<h4>RVR 运行分级</h4><ul><li>CAT I ≥550 m、II ≥300 m、IIIa ≥200 m、IIIb ≥75 m。</li><li>RVR&lt;550 m 启动 LVP。</li></ul><p>低能见度是进近着陆主要威胁。按 RVR 决定运行等级。</p>
 <div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:30%"><col style="width:38%"><col style="width:32%"></colgroup>
 <tr><th>RVR</th><th>运行</th><th>典型设施</th></tr>
@@ -993,7 +1045,7 @@ var TOPICS=[
 <tr><td>≥75 m</td><td>IIIb 类运行</td><td>自动着陆</td></tr>
 <tr><td>&lt;75 m</td><td>IIIc 运行</td><td>无滑出引导</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>CAT I≥550 m、II≥300 m、IIIa≥200 m、IIIb≥75 m；LVP 在 RVR&lt;550 m 启动。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>CAT I≥550 m、II≥300 m、IIIa≥200 m、IIIb≥75 m；LVP 在 RVR&lt;550 m 启动。</div>`,rel:['m3-10','m4-11','m2-3'],src:['AOC气象教材第三分册.doc','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['低能见度运行按 RVR 分级决定类别。','CAT I 常规进近 RVR 大于五百五十米，二类运行三百米。','三类运行 RVR 可低至七十五米甚至更低。','RVR 小于五百五十米启动低能见度程序 LVP。']},
 {t:'m4-5',m:'m4',ti:'飞机积冰运行',s:'明冰最危险；-2~-10℃ 强积冰；改出变高度。',h:`<ul>
 <li>明冰透明坚硬、附着强，危害最大；</li>
 <li>强积冰温度 -2~-10℃，由大过冷水滴形成；</li>
@@ -1006,28 +1058,28 @@ var TOPICS=[
 <li>识别积冰后立即改变高度或航向脱离（进入温度较高或无过冷水区）；</li>
 <li>严重积冰时着陆重量增加，注意进场速度。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>明冰最危险；改出=变高度/航向；-2~-10℃。</div>`},
-{t:'m4-6',m:'m4',ti:'颠簸运行',s:'按 Δn 分级；绕飞急流轴。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>明冰最危险；改出=变高度/航向；-2~-10℃。</div>`,rel:['m2-5','m4-14','m4-9'],src:['AC-91-FS-2013-18 低温冰雪运行指南.pdf','地面结冰条件下的运行 AC-121-50-R2.pdf','AOC气象教材第三分册.doc'],talk:['明冰透明坚硬附着强，危害最大。','强积冰在零下二到零下十度过冷水云，翼尖尾翼先积冰。','进入结冰区前打开防除冰装置，识别后立即变高度或航向脱离。','严重积冰不得继续进近，着陆重量增加要注意进场速度。']},
+{t:'m4-6',m:'m4',ti:'颠簸运行',s:'按 Δn 分级；绕飞急流轴。',h:`<h4>分级与对策</h4><ul><li>Δn：轻 0~0.5、中 0.5~1.0、强 &gt;1.0。</li><li>调颠簸穿透速度，绕飞 CAT。</li></ul><ul>
 <li>轻度 Δn 0~0.5、中度 0.5~1.0、严重 &gt;1.0；</li>
 <li>热力乱流在对流云区；动力乱流在山脉背风面；晴空湍流 CAT 在急流轴附近；</li>
 <li>对策：调整速度至颠簸穿透速度，绕飞 CAT 区，提醒乘客系安全带。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>按 Δn 分级；颠簸穿透速度；CAT 在急流附近。</div>`},
-{t:'m4-7',m:'m4',ti:'台风运行',s:'六等级；绕飞眼墙；机场关闭决策。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>按 Δn 分级；颠簸穿透速度；CAT 在急流附近。</div>`,rel:['m2-6','m3-5','m4-1'],src:['AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf','AOC气象教材第三分册.doc'],talk:['颠簸按载荷因数变化分级，大于一为严重。','热力乱流在对流云区，动力乱流在山背风，晴空湍流在急流附近。','对策是调整到颠簸穿透速度，绕飞 CAT 区。','提醒乘客系好安全带，必要时绕飞急流轴。']},
+{t:'m4-7',m:'m4',ti:'台风运行',s:'六等级；绕飞眼墙；机场关闭决策。',h:`<h4>运行要点</h4><ul><li>眼墙最烈，右半圆危险。</li><li>机场提前关闭、转场备降。</li></ul><ul>
 <li>台风眼区微风，眼墙风雨最强；</li>
 <li>北半球台风逆时针旋转，右半圆危险半圆风速叠加；</li>
 <li>机场在台风来临前关闭，航空器转场备降；</li>
 <li>绕飞应避开眼墙至少几十海里，不从台风中心附近穿越。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>右半圆危险；眼墙最烈；机场提前关闭转场。</div>`},
-{t:'m4-8',m:'m4',ti:'火山灰运行',s:'吸入熔堵发动机；VAAC 发布；立即脱离。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>右半圆危险；眼墙最烈；机场提前关闭转场。</div>`,rel:['m2-8','m4-13','m5-8'],src:['AOC气象教材第三分册.doc'],talk:['台风眼区微风晴朗，眼墙风雨最烈。','北半球台风逆时针旋转，右半圆为危险半圆。','机场在台风来临前关闭，航空器转场备降。','绕飞应避开眼墙几十海里，不从中心附近穿越。']},
+{t:'m4-8',m:'m4',ti:'火山灰运行',s:'吸入熔堵发动机；VAAC 发布；立即脱离。',h:`<h4>VAAC 代码</h4><ul><li>全球 9 个 VAAC。</li><li>红=可能存在、琥珀=需注意、绿=无。</li></ul><ul>
 <li>火山灰熔融后在涡轮叶片上凝固，造成发动机喘振停车；</li>
 <li>VAAC 发布火山灰咨询与颜色代码；</li>
 <li>飞行中遇火山灰立即改变高度/航向脱离，避免吸入；</li>
 <li>英航 B747 加隆贡案例：四发停车滑翔后重启。</li>
 </ul>
 <div class="callout danger"><span class="co-t">运行要点</span>收到 VAAC 警告即改航；不穿越红色区域。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>9 个 VAAC；颜色红/琥珀/绿；立即脱离。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>9 个 VAAC；颜色红/琥珀/绿；立即脱离。</div>`,rel:['m2-10','m5-8','m4-13'],src:['AOC气象教材第三分册.doc','附件3第21版本中文.pdf'],talk:['火山灰熔融后在涡轮凝固，造成发动机喘振停车。','火山灰咨询由九个 VAAC 发布，附颜色代码。','飞行中遇火山灰立即改变高度或航向脱离。','收到红色区域警告即改航，不穿越红色区域。']},
 {t:'m4-9',m:'m4',ti:'地面除防冰',s:'两次除冰；保持时间检查；清洁机体标准。',h:`<h4>清洁机体标准</h4>
 <ul>
 <li>机翼/操纵面不得有霜、雪、冰；机翼上表面"感觉法"与目视检查；</li>
@@ -1041,8 +1093,8 @@ var TOPICS=[
 <li>起飞前驾驶舱绕机检查确认无可见霜冰雪。</li>
 </ul>
 <div class="callout warn"><span class="co-t">运行要点</span>保持时间内未起飞须重新除冰；不要凭"已喷防冰"假设机体清洁。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>清洁机体；两步法；保持时间计时；超时重除。</div>`},
-{t:'m4-10',m:'m4',ti:'飞行前气象讲解与天气图使用',s:'起飞前讲解内容；天气图判读顺序。',h:`<p>飞行前应向气象预报员或通过系统获取：起飞机场、航路、目的地与备降场的天气，以及 SIGMET/AIRMET。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>清洁机体；两步法；保持时间计时；超时重除。</div>`,rel:['m4-5','m4-15','m2-5'],src:['AC-91-FS-2013-18 低温冰雪运行指南.pdf','地面结冰条件下的运行 AC-121-50-R2.pdf'],talk:['清洁机体标准是机翼和操纵面无霜雪冰。','除防冰有一步法和两步法，两步法第一步热液除冰、第二步凝胶防冰。','保持时间从防冰液喷涂完成起按型号和温度计时。','超时未起飞必须重新除冰，不能凭已喷液假设清洁。']},
+{t:'m4-10',m:'m4',ti:'飞行前气象讲解与天气图使用',s:'起飞前讲解内容；天气图判读顺序。',h:`<h4>讲解顺序</h4><ul><li>起飞/航路/目的/备降四张图。</li><li>SIGMET/AIRMET 必看。</li></ul><p>飞行前应向气象预报员或通过系统获取：起飞机场、航路、目的地与备降场的天气，以及 SIGMET/AIRMET。</p>
 <ul>
 <li><strong>地面图</strong>看高低压、锋面、雷暴区；</li>
 <li><strong>等压面图</strong>看槽脊、急流、副高；</li>
@@ -1050,144 +1102,168 @@ var TOPICS=[
 <li><strong>SIGMET/AIRMET</strong>看航路危险天气区；</li>
 <li><strong>TAF</strong>看目的地与备降场变化。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>讲解覆盖起飞/航路/目的/备降四张图；SIGMET 必看。</div>`},
-{t:'m4-11',m:'m4',ti:'进近着陆最低标准',s:'DA/H、MDA/H、VIS/RVR 三要素。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>讲解覆盖起飞/航路/目的/备降四张图；SIGMET 必看。</div>`,rel:['m1-9','m3-7','m4-12'],src:['AOC气象教材第三分册.doc','民用航空气象预报规范 AP-117-TM-2019-01.pdf'],talk:['飞行前讲解覆盖起飞机场、航路、目的地和备降场天气。','地面图看高低压锋面和雷暴区，等压面图看槽脊急流。','T-lnP 图看对流潜势，SIGMET 看航路危险天气。','TAF 看目的地和备降场变化。']},
+{t:'m4-11',m:'m4',ti:'进近着陆最低标准',s:'DA/H、MDA/H、VIS/RVR 三要素。',h:`<h4>两类进近</h4><ul><li>精密：DH 到即复飞。</li><li>非精密：MDH 可平飞。</li></ul><ul>
 <li><strong>精密进近</strong>：以 <strong>DH</strong>（决断高）为界，到 DH 未见跑道即复飞；</li>
 <li><strong>非精密进近</strong>：以 <strong>MDH</strong>（最低下降高）为参考，可在 MDA 平飞；</li>
 <li>目视参考要求：见跑道灯光/标志；</li>
 <li>着陆最低标准由机场、机型、机组资质与设施决定。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>精密=DH 即复飞；非精密=MDH 可平飞；RVR 决定运行类别。</div>`},
-{t:'m4-12',m:'m4',ti:'备降场天气要求',s:'目的地天气低于着陆最低时必须选备降场。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>精密=DH 即复飞；非精密=MDH 可平飞；RVR 决定运行类别。</div>`,rel:['m4-4','m4-12','m3-10'],src:['AOC气象教材第三分册.doc','民用航空气象服务管理办法.pdf'],talk:['精密进近以决断高 DH 为界，到 DH 未见跑道即复飞。','非精密进近以最低下降高 MDH 为参考，可在 MDA 平飞。','着陆最低标准由机场、机型、机组资质和设施决定。','RVR 决定运行类别，目视参考要求见到跑道灯光标志。']},
+{t:'m4-12',m:'m4',ti:'备降场天气要求',s:'目的地天气低于着陆最低时必须选备降场。',h:`<h4>备降条件</h4><ul><li>目的天气差 → 选备降。</li><li>备降场天气须高于备降标准。</li></ul><ul>
 <li>起飞机场必须有天气低于着陆最低标准时的备降方案；</li>
 <li>目的地预报在到达前后 1 小时天气低于着陆最低标准，须选择备降场；</li>
 <li>备降场天气须高于备降最低标准；</li>
 <li>燃油计划需考虑等待与备降航程。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>目的地天气差→选备降；备降场天气须高于备降标准。</div>`},
-{t:'m4-13',m:'m4',ti:'巡航绕飞与改航',s:'绕飞雷暴≥20 km；改航避开火山灰与台风。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>目的地天气差→选备降；备降场天气须高于备降标准。</div>`,rel:['m4-11','m4-10','m5-6'],src:['AOC气象教材第三分册.doc','民用航空气象预报规范 AP-117-TM-2019-01.pdf'],talk:['目的地天气低于着陆最低标准时必须选备降场。','预报在到达前后一小时天气低于标准即需备降。','备降场天气须高于备降最低标准。','燃油计划要考虑等待和备降航程。']},
+{t:'m4-13',m:'m4',ti:'巡航绕飞与改航',s:'绕飞雷暴≥20 km；改航避开火山灰与台风。',h:`<h4>绕飞间距</h4><ul><li>雷暴 ≥20 km，眼墙几十海里。</li><li>绕飞同时评估剩余燃油。</li></ul><ul>
 <li>雷暴绕飞上风方向 ≥20 km；</li>
 <li>火山灰按 VAAC 咨询避开红色区域；</li>
 <li>台风绕飞眼墙几十海里；</li>
 <li>绕飞增加油量，需评估剩余燃油。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>绕飞间距+油量评估并重。</div>`},
-{t:'m4-14',m:'m4',ti:'结冰区识别与脱离',s:'温度-2~-10℃ 过冷水云；变高度/航向脱离。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>绕飞间距+油量评估并重。</div>`,rel:['m4-1','m4-7','m4-8'],src:['AOC气象教材第三分册.doc','AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf'],talk:['雷暴绕飞上风方向至少二十公里。','火山灰按 VAAC 咨询避开红色区域。','台风绕飞眼墙几十海里，不穿越中心。','绕飞增加油量，需评估剩余燃油。']},
+{t:'m4-14',m:'m4',ti:'结冰区识别与脱离',s:'温度-2~-10℃ 过冷水云；变高度/航向脱离。',h:`<h4>脱离方法</h4><ul><li>-2~-10℃ 强积冰。</li><li>升高到 -40℃ 冰晶区或降到 0℃ 以上。</li></ul><ul>
 <li>云中温度 -2~-10℃ 且有过冷水滴时易积冰；</li>
 <li>机翼/风挡出现可见积冰即启动防除冰；</li>
 <li>脱离方法：升高（进入-40℃冰晶区）或下降到 0℃ 以上，或改变航向；</li>
 <li>严重积冰不得继续进近。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>-2~-10℃ 强积冰；变高度/航向脱离。</div>`},
-{t:'m4-15',m:'m4',ti:'冬季污染跑道着陆性能',s:'污染跑道增加滑跑距离。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>-2~-10℃ 强积冰；变高度/航向脱离。</div>`,rel:['m2-5','m4-5','m4-9'],src:['AC-91-FS-2013-18 低温冰雪运行指南.pdf','地面结冰条件下的运行 AC-121-50-R2.pdf'],talk:['云中零下二到零下十度且有过冷水滴时易积冰。','机翼风挡出现可见积冰即启动防除冰。','脱离方法是升高进入冰晶区或下降到零度以上，或变航向。','严重积冰不得继续进近。']},
+{t:'m4-15',m:'m4',ti:'冬季污染跑道着陆性能',s:'污染跑道增加滑跑距离。',h:`<h4>刹车效应</h4><ul><li>好/中/差/很差四级。</li><li>污染跑道滑跑增长，看跑道状况代码。</li></ul><ul>
 <li>污染跑道（积水/雪/冰）刹车效应差，滑跑距离增长；</li>
 <li>湿跑道刹车效应分级：好/中/差/很差；</li>
 <li>着陆前评估刹车效应报告与跑道状况代码；</li>
 <li>必要时选择长跑道或推迟着陆。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>污染跑道滑跑增长；看刹车效应报告。</div>`},
-{t:'m5-1',m:'m5',ti:'ICAO 附件三',s:'航空气象服务国际标准与建议措施。',h:`<p><strong>ICAO 附件三（Annex 3）《国际航空气象服务》</strong>是各国航空气象服务的国际标准，规定观测、预报、情报交换与服务机构职责。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>污染跑道滑跑增长；看刹车效应报告。</div>`,rel:['m4-9','m4-4','m2-9'],src:['AC-91-FS-2013-18 低温冰雪运行指南.pdf','地面结冰条件下的运行 AC-121-50-R2.pdf'],talk:['污染跑道刹车效应差，着陆滑跑距离增长。','湿跑道刹车效应分好、中、差、很差四级。','着陆前评估刹车效应报告和跑道状况代码。','必要时选长跑道或推迟着陆。']},
+{t:'m5-1',m:'m5',ti:'ICAO 附件三',s:'航空气象服务国际标准与建议措施。',h:`<h4>附件三框架</h4><ul><li>观测/预报/警报/交换四大块。</li><li>各国航空气象服务的国际总章。</li></ul><p><strong>ICAO 附件三（Annex 3）《国际航空气象服务》</strong>是各国航空气象服务的国际标准，规定观测、预报、情报交换与服务机构职责。</p>
 <ul>
 <li>观测：METAR/SPECI、自动观测、地面/高空观测；</li>
 <li>预报：TAF、区域预报、高空风温、重要天气预报；</li>
 <li>警报：SIGMET、AIRMET、火山灰与热带气旋咨询、机场警报、风切变警报；</li>
 <li>情报交换：通过 WIFS 与区域信息交换。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>附件三=航空气象服务国际总章；规定观测/预报/警报/交换。</div>`},
-{t:'m5-2',m:'m5',ti:'CCAR-117-R2',s:'中国民用航空气象工作规则。',h:`<p><strong>CCAR-117-R2《民用航空气象工作规则》</strong>是我国航空气象工作的部门规章，规定服务机构、人员、观测预报与情报交换。</p>
+<div class="callout tip"><span class="co-t">考点速记</span>附件三=航空气象服务国际总章；规定观测/预报/警报/交换。</div>`,rel:['m5-2','m5-4','m3-4'],src:['附件3第21版本中文.pdf','an03_21ed.pdf','PANS-MET.pdf'],talk:['ICAO 附件三是国际航空气象服务标准与建议措施。','它规定观测、预报、警报和情报交换的国际框架。','观测含 METAR 和 SPECI，预报含 TAF 和区域预报。','警报含 SIGMET、AIRMET、火山灰和热带气旋咨询。']},
+{t:'m5-2',m:'m5',ti:'CCAR-117-R2',s:'中国民用航空气象工作规则。',h:`<h4>规章定位</h4><ul><li>部门规章，气象工作母法。</li><li>下位：观测/预报/情报交换规范。</li></ul><p><strong>CCAR-117-R2《民用航空气象工作规则》</strong>是我国航空气象工作的部门规章，规定服务机构、人员、观测预报与情报交换。</p>
 <ul>
 <li>明确民航气象中心、地区气象中心、机场气象台职责；</li>
 <li>规定观测、预报、警报的发布要求；</li>
 <li>规定气象人员资质与培训；</li>
 <li>下位规范包括观测规范、预报规范、情报交换规范。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>CCAR-117-R2 是我国气象工作母法；下位四部下位规范。</div>`},
-{t:'m5-3',m:'m5',ti:'航空气象观测规范',s:'观测时间、项目与仪器要求。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>CCAR-117-R2 是我国气象工作母法；下位四部下位规范。</div>`,rel:['m5-1','m5-3','m5-10'],src:['CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['CCAR-117-R2 是我国民用航空气象工作的部门规章。','它规定服务机构、人员、观测预报和情报交换职责。','下位有观测、预报、情报交换等多部规范。','是我国气象工作的母法。']},
+{t:'m5-3',m:'m5',ti:'航空气象观测规范',s:'观测时间、项目与仪器要求。',h:`<h4>观测时间与高度</h4><ul><li>定时正点 + 特殊随时。</li><li>RVR 2.5 m、主导能见度 1.5 m。</li></ul><ul>
 <li><strong>定时观测</strong>：每半小时或每小时正点；</li>
 <li><strong>特殊观测</strong>：达到阈值随时发布 SPECI；</li>
 <li>观测项目：风、气压、温露、云、能见度、天气现象、降水、RVR；</li>
 <li>观测场地开阔、无遮挡；仪器按检定周期校准；</li>
 <li>RVR 在接地区约 2.5 m 高测量；主导能见度约 1.5 m 高观测。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>定时正点+特殊随时；RVR 2.5 m、主导能见度 1.5 m。</div>`},
-{t:'m5-4',m:'m5',ti:'预报与情报交换规范',s:'TAF 时效；情报交换通过区域节点。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>定时正点+特殊随时；RVR 2.5 m、主导能见度 1.5 m。</div>`,rel:['m3-1','m5-12','m5-5'],src:['民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf','CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['定时观测每半小时或每小时正点进行，特殊观测达阈值随时发布。','观测项目含风、气压、温露、云、能见度、天气现象和 RVR。','RVR 在接地区约二点五米高测量，主导能见度约一点五米高。','观测场地开阔无遮挡，仪器按周期检定。']},
+{t:'m5-4',m:'m5',ti:'预报与情报交换规范',s:'TAF 时效；情报交换通过区域节点。',h:`<h4>时效要点</h4><ul><li>TAF 9~30 h；SIGMET ≤4 h。</li><li>情报经 WIFS 区域节点交换。</li></ul><ul>
 <li><strong>TAF</strong> 有效期 9~30 h，修订以 AMD 标识；</li>
 <li><strong>SIGMET</strong> 时效 ≤4 h；</li>
 <li><strong>AIRMET</strong> 针对中度不利天气；</li>
 <li>情报交换通过 WIFS 区域节点，按规定格式与时间发布；</li>
 <li>飞行中可通过 VOLMET、ATIS 与航行情报服务索取。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>TAF 9~30 h；SIGMET≤4 h；AMD 修订。</div>`},
-{t:'m5-5',m:'m5',ti:'机场天气报告的发布',s:'METAR 定时、SPECI 特殊；内容顺序固定。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>TAF 9~30 h；SIGMET≤4 h；AMD 修订。</div>`,rel:['m5-1','m3-4','m5-14'],src:['民用航空气象预报规范 AP-117-TM-2019-01.pdf','民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf','CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['TAF 有效期九到三十小时，修订以 AMD 标识。','SIGMET 时效不超过四小时，AIRMET 针对中度不利天气。','情报交换通过区域节点按规定格式时间发布。','飞行中可通过 VOLMET、ATIS 索取。']},
+{t:'m5-5',m:'m5',ti:'机场天气报告的发布',s:'METAR 定时、SPECI 特殊；内容顺序固定。',h:`<h4>发布时机</h4><ul><li>METAR 正点后 10 分钟内。</li><li>趋势组时效 2 h。</li></ul><ul>
 <li><strong>METAR</strong>：每半小时或每小时正点后 10 分钟内发布；</li>
 <li><strong>SPECI</strong>：天气达到变化阈值（能见度/云高/风/天气现象）随时发布；</li>
 <li>内容顺序：报头→风→能见度→天气→云→温露→气压→趋势；</li>
 <li>趋势预报 NOSIG/BECMG/TEMPO，时效 2 h。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>METAR 定时、SPECI 特殊；趋势 2 h。</div>`},
-{t:'m5-6',m:'m5',ti:'航站预报 TAF 规范',s:'有效期 9~30 h；AMD 修订；COR 更正。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>METAR 定时、SPECI 特殊；趋势 2 h。</div>`,rel:['m3-2','m5-3','m5-6'],src:['民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf','CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['METAR 定时发布，正点后十分钟内；SPECI 达阈值随时发布。','内容顺序固定为报头到风、能见度、天气、云、温露、气压、趋势。','趋势预报时效两小时。','SPECI 触发条件包括能见度、云高、风和天气现象变化。']},
+{t:'m5-6',m:'m5',ti:'航站预报 TAF 规范',s:'有效期 9~30 h；AMD 修订；COR 更正。',h:`<h4>标识</h4><ul><li>AMD 修订、COR 更正、NIL 无报文。</li><li>覆盖 5 km 半径。</li></ul><ul>
 <li>TAF 覆盖机场 5 km 半径；</li>
 <li>有效期通常 9~30 h，按机场规定；</li>
 <li>内容包括风、能见度、天气、云、温度；</li>
 <li><code>AMD</code> 修订预报；<code>COR</code> 更正先前报文；<code>NIL</code> 无报文。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>TAF 9~30 h；AMD 修订、COR 更正。</div>`},
-{t:'m5-7',m:'m5',ti:'重要气象情报规范',s:'SIGMET≤4 h；AIRMET 中度；CNL 取消。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>TAF 9~30 h；AMD 修订、COR 更正。</div>`,rel:['m3-3','m5-5','m5-4'],src:['民用航空气象预报规范 AP-117-TM-2019-01.pdf','关于 TAF AMD 的理解.docx','CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['TAF 覆盖机场五公里半径，有效期九到三十小时。','内容含风、能见度、天气、云和温度。','AMD 修订预报，COR 更正先前报文，NIL 表示无报文。','修订预报发布后旧版即作废。']},
+{t:'m5-7',m:'m5',ti:'重要气象情报规范',s:'SIGMET≤4 h；AIRMET 中度；CNL 取消。',h:`<h4>分级</h4><ul><li>SIGMET 危险、AIRMET 中度。</li><li>≤4 h，CNL 取消。</li></ul><ul>
 <li>SIGMET 针对雷暴、强烈颠簸、强烈积冰、严重山地波、火山灰、热带气旋；</li>
 <li>AIRMET 针对中度颠簸、中度积冰、顶高、能见度差；</li>
 <li>时组为 UTC；有效时段 hhhh/hhhh；</li>
 <li><code>CNL</code> 取消先前发布；超出时效发新报文。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>SIGMET 危险、AIRMET 中度；≤4 h；CNL 取消。</div>`},
-{t:'m5-8',m:'m5',ti:'火山灰与热带气旋咨询',s:'VAAC 9 个；JTWC/中央台命名。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>SIGMET 危险、AIRMET 中度；≤4 h；CNL 取消。</div>`,rel:['m3-4','m5-8','m5-9'],src:['民用航空气象预报规范 AP-117-TM-2019-01.pdf','民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf','附件3第21版本中文.pdf'],talk:['SIGMET 针对雷暴、强颠簸、强积冰、严重山地波、火山灰和热带气旋。','AIRMET 针对中度颠簸、中度积冰、顶高和能见度差。','时组为世界时，有效时段用起止时分表示。','CNL 取消先前发布，超出时效发新报文。']},
+{t:'m5-8',m:'m5',ti:'火山灰与热带气旋咨询',s:'VAAC 9 个；JTWC/中央台命名。',h:`<h4>咨询中心</h4><ul><li>9 个 VAAC；WV/WR 开头。</li><li>我国中央气象台命名台风。</li></ul><ul>
 <li>全球 9 个 VAAC 发布火山灰咨询与颜色代码；</li>
 <li>热带气旋由 RSMC（如东京、NHC）与区域专业中心命名；</li>
 <li>我国由中央气象台负责台风编号命名；</li>
 <li>咨询报文以 <code>WV</code>（火山灰）、<code>WR</code>（热带气旋）开头。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>9 个 VAAC；WV/WR 开头；我国中央气象台命名。</div>`},
-{t:'m5-9',m:'m5',ti:'警报种类与发布',s:'机场警报、风切变警报。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>9 个 VAAC；WV/WR 开头；我国中央气象台命名。</div>`,rel:['m2-10','m4-8','m5-7'],src:['附件3第21版本中文.pdf','民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf','10157_1ed_en.pdf'],talk:['全球九个 VAAC 发布火山灰咨询和颜色代码。','热带气旋由区域专业中心命名，我国由中央气象台编号命名。','咨询报文以 WV 和 WR 开头。','颜色代码红、琥珀、绿分别对应可能存在、需注意、无火山灰。']},
+{t:'m5-9',m:'m5',ti:'警报种类与发布',s:'机场警报、风切变警报。',h:`<h4>两类警报</h4><ul><li>机场警报=地面天气。</li><li>风切变警报=进近/起飞航道。</li></ul><ul>
 <li><strong>机场警报</strong>：机场即将或已出现雷暴、沙暴、强降水等影响地面运行的天气；</li>
 <li><strong>风切变警报</strong>：机场进近/起飞航道出现风切变；</li>
 <li>警报发布后通过 ATC 与飞行服务通报航空器；</li>
 <li>警报解除需明确条件。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>机场警报=地面天气；风切变警报=进近/起飞航道。</div>`},
-{t:'m5-10',m:'m5',ti:'航空气象服务机构职责',s:'中心/地区/机场三级。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>机场警报=地面天气；风切变警报=进近/起飞航道。</div>`,rel:['m5-7','m3-4','m4-3'],src:['民用航空气象预报规范 AP-117-TM-2019-01.pdf','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf','CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['机场警报针对即将或已影响地面运行的雷暴、沙暴、强降水。','风切变警报针对进近或起飞航道出现的风切变。','警报通过 ATC 和飞行服务通报航空器。','警报解除需明确条件。']},
+{t:'m5-10',m:'m5',ti:'航空气象服务机构职责',s:'中心/地区/机场三级。',h:`<h4>三级机构</h4><ul><li>中心 → 地区 → 机场。</li><li>机场气象台做 TAF 与本场警报。</li></ul><ul>
 <li><strong>民航气象中心</strong>：全国气象资料汇总与交换、重要气象情报制作；</li>
 <li><strong>地区气象中心</strong>：区域预报与警报；</li>
 <li><strong>机场气象台</strong>：本场观测、TAF、机场警报；</li>
 <li>飞行气象情报通过飞行服务单位分发机组。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>中心→地区→机场三级；机场气象台做 TAF 与本场警报。</div>`},
-{t:'m5-11',m:'m5',ti:'飞行中气象情报索取',s:'VOLMET、ATIS、ATC 转报。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>中心→地区→机场三级；机场气象台做 TAF 与本场警报。</div>`,rel:['m5-2','m5-11','m5-14'],src:['CCAR117-R2 中国民用航空气象工作规则.pdf','民用航空气象服务管理办法.pdf'],talk:['服务机构分民航气象中心、地区气象中心、机场气象台三级。','中心负责全国资料汇总交换和重要气象情报。','地区中心做区域预报和警报，机场气象台做本场观测和 TAF。','飞行情报通过飞行服务单位分发机组。']},
+{t:'m5-11',m:'m5',ti:'飞行中气象情报索取',s:'VOLMET、ATIS、ATC 转报。',h:`<h4>获取渠道</h4><ul><li>飞行前讲解；飞行中 VOLMET/ATC/ATIS。</li></ul><ul>
 <li>飞行前通过讲解获取；</li>
 <li>飞行中通过 <strong>VOLMET</strong> 守听区域广播；</li>
 <li>通过 <strong>ATC</strong> 索取最新天气；</li>
 <li>目的地 ATIS 在进近前收听。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>飞行前讲解+飞行中 VOLMET/ATC/ATIS。</div>`},
-{t:'m5-12',m:'m5',ti:'观测场地与仪器',s:'开阔无遮挡；仪器定期检定。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>飞行前讲解+飞行中 VOLMET/ATC/ATIS。</div>`,rel:['m3-7','m5-10','m5-4'],src:['民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf','民用航空气象服务管理办法.pdf'],talk:['飞行前通过讲解获取气象情报。','飞行中守听 VOLMET 区域广播，或通过 ATC 索取最新天气。','目的地 ATIS 在进近前收听。','多种渠道互补，确保掌握最新天气。']},
+{t:'m5-12',m:'m5',ti:'观测场地与仪器',s:'开阔无遮挡；仪器定期检定。',h:`<h4>场地要求</h4><ul><li>开阔无遮挡；仪器定期检定。</li></ul><ul>
 <li>观测场地应开阔、无高大遮挡；</li>
 <li>风仪装在跑道附近开阔处；</li>
 <li>云高仪、能见度仪、RVR 设备按跑道配置；</li>
 <li>仪器按周期检定，记录留档。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>开阔无遮挡；定期检定。</div>`},
-{t:'m5-13',m:'m5',ti:'气象人员资质',s:'观测员/预报员持证上岗。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>开阔无遮挡；定期检定。</div>`,rel:['m5-3','m3-1','m5-13'],src:['民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf','CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['观测场地应开阔无高大遮挡。','风仪装在跑道附近开阔处，云高仪和能见度仪按跑道配置。','仪器按周期检定并记录留档。','场地选择直接影响观测代表性。']},
+{t:'m5-13',m:'m5',ti:'气象人员资质',s:'观测员/预报员持证上岗。',h:`<h4>资质要求</h4><ul><li>持证上岗 + 定期复训。</li></ul><ul>
 <li>观测员、预报员须经过培训并取得相应执照；</li>
 <li>定期复训与考核；</li>
 <li>值班时按规范发布与校订报文。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>持证上岗+定期复训。</div>`},
-{t:'m5-14',m:'m5',ti:'资料归档与交换',s:'报文存档；区域节点交换。',h:`<ul>
+<div class="callout tip"><span class="co-t">考点速记</span>持证上岗+定期复训。</div>`,rel:['m5-2','m5-12','m5-10'],src:['CCAR117-R2 中国民用航空气象工作规则.pdf','民用航空气象服务管理办法.pdf'],talk:['观测员和预报员须经培训取得执照。','定期复训与考核保持资质。','值班按规范发布和校订报文。','人员资质是报文质量的根本保障。']},
+{t:'m5-14',m:'m5',ti:'资料归档与交换',s:'报文存档；区域节点交换。',h:`<h4>归档与交换</h4><ul><li>报文归档；WIFS 区域节点交换。</li></ul><ul>
 <li>观测报文与预报报文按规定归档；</li>
 <li>通过 WIFS 区域节点按格式与时间交换；</li>
 <li>重要天气情报与警报留痕。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>归档+WIFS 交换。</div>`},
+<div class="callout tip"><span class="co-t">考点速记</span>归档+WIFS 交换。</div>`,rel:['m5-4','m5-10','m3-8'],src:['民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf','CCAR117-R2 中国民用航空气象工作规则.pdf'],talk:['观测和预报报文按规定归档。','通过 WIFS 区域节点按格式和时间交换。','重要天气情报和警报留痕。','归档与交换满足追溯和国际互通要求。']},
 /* topics end */
 ];
+/* ============ 参考资料目录 ============ */
+var REFS=[
+ {name:'AOC气象教材第一分册.doc',type:'教材',desc:'AOC 气象教材第一分册：基础大气理论，大气结构、气压温度湿度风与气团锋。',topics:['m1-1','m1-2','m1-3','m1-4','m1-5','m1-6','m1-7','m1-8','m1-9']},
+ {name:'AOC气象教材第二分册.doc',type:'教材',desc:'AOC 气象教材第二分册：天气现象与成因，云、降水、雾、雷暴、积冰、颠簸、台风。',topics:['m1-7','m1-9','m2-1','m2-2','m2-3','m2-4','m2-5','m2-6','m2-7','m2-8','m2-9','m2-10','m2-11']},
+ {name:'AOC气象教材第三分册.doc',type:'教材',desc:'AOC 气象教材第三分册：危险天气运行与综合应用，绕飞、改航与性能。',topics:['m1-8','m3-6','m4-1','m4-2','m4-3','m4-4','m4-5','m4-6','m4-7','m4-8','m4-10','m4-11','m4-12','m4-13']},
+ {name:'AC-91-FS-2013-18 低温冰雪运行指南.pdf',type:'咨询通告',desc:'AC-91-FS-2013-18：低温冰雪运行指南，积冰与冬季运行。',topics:['m2-5','m4-5','m4-9','m4-14','m4-15']},
+ {name:'AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf',type:'咨询通告',desc:'AC-91-FS-2014-20：雷暴、晴空颠簸、低空风切变运行指南。',topics:['m2-4','m2-6','m2-7','m3-6','m4-1','m4-2','m4-3','m4-6','m4-13']},
+ {name:'CCAR117-R2 中国民用航空气象工作规则.pdf',type:'规章',desc:'CCAR-117-R2：中国民用航空气象工作规则，气象工作母法。',topics:['m5-2','m5-3','m5-4','m5-5','m5-6','m5-9','m5-10','m5-12','m5-13','m5-14']},
+ {name:'民用航空气象服务管理办法.pdf',type:'规章',desc:'民用航空气象服务管理办法：服务机构与人员管理。',topics:['m4-11','m5-10','m5-11','m5-13']},
+ {name:'民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf',type:'规范',desc:'民用航空气象地面观测规范 AP-117-TM-2021-01R2。',topics:['m2-3','m3-1','m3-2','mr-1','m3-10','m3-12','m4-4','m5-3','m5-5','m5-9','m5-12']},
+ {name:'民用航空气象预报规范 AP-117-TM-2019-01.pdf',type:'规范',desc:'民用航空气象预报规范 AP-117-TM-2019-01。',topics:['m3-3','m3-4','m3-5','m3-8','m4-10','m4-12','m5-4','m5-6','m5-7','m5-9']},
+ {name:'民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf',type:'规范',desc:'民航气象情报发布与交换办法 AP-117-TM-2009-01R2。',topics:['m3-7','m3-8','m5-4','m5-7','m5-8','m5-11','m5-14']},
+ {name:'地面结冰条件下的运行 AC-121-50-R2.pdf',type:'咨询通告',desc:'地面结冰条件下的运行 AC-121-50-R2：除防冰与保持时间。',topics:['m2-5','m4-5','m4-9','m4-14','m4-15']},
+ {name:'世界气象组织《电码手册》WMO-No.306（英文）',type:'手册',desc:'WMO-No.306 电码手册（英文）：报文电码与缩略语国际标准。',topics:['m3-2','mr-1','m3-9','m3-11','m3-13','m3-14']},
+ {name:'关于 TAF AMD 的理解.docx',type:'文档',desc:'关于 TAF AMD 的理解：TAF 修订预报的发布与作废规则。',topics:['m3-3','m5-6']},
+ {name:'民航气象常用缩略语及符号含义.docx',type:'文档',desc:'民航气象常用缩略语及符号含义：缩略语词素整理。',topics:['m3-2','mr-1','m3-9','m3-10','m3-11','m3-12','m3-13','m3-14']},
+ {name:'国际气象报文识读.pptx',type:'课件',desc:'国际气象报文识读：METAR/TAF/RMK 六段拆解与示例。',topics:['m3-1','m3-2','m3-3','m3-4','m3-5','m3-7','m3-8','mr-1','m3-9','m3-10','m3-11','m3-12','m3-13','m3-14']},
+ {name:'附件3第21版本中文.pdf',type:'国际文件',desc:'ICAO 附件 3 第 21 版中文：国际航空气象服务标准。',topics:['m3-4','m4-8','m5-1','m5-7','m5-8']},
+ {name:'an03_21ed.pdf',type:'国际文件',desc:'ICAO Annex 3 21st edition (English)。',topics:['m5-1']},
+ {name:'PANS-MET.pdf',type:'国际文件',desc:'PANS-MET《空中航行服务程序——气象》。',topics:['m5-1']},
+ {name:'10157_1ed_en.pdf',type:'国际文件',desc:'Doc 10157 国际航空气象配套文件。',topics:['m5-8']},
+];
+var REFS_BYNAME={}; REFS.forEach(function(r){REFS_BYNAME[r.name]=r;});
+
 
 /* ============ 工具 ============ */
 var MODMAP={}; MODULES.forEach(function(m){MODMAP[m.id]=m;});
@@ -1200,7 +1276,8 @@ function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace
 function buildSidebar(active){
   var sb=document.getElementById('sidebar');
   var html='<div class="nav-group"><div class="nav-title" style="cursor:pointer" onclick="location.hash=\'#/\'"><span class="n-dot" style="background:#2F6FED"></span>总览首页</div>'
-    +'<a href="#/quiz"'+(active==='quiz'?' class="active"':'')+'>备考自测 <span class="n-sub">'+QDATA.length+' 题</span></a></div>';
+    +'<a href="#/quiz"'+(active==='quiz'?' class="active"':'')+'>备考自测 <span class="n-sub">'+QDATA.length+' 题</span></a>'
+    +'<a href="#/refs"'+(active==='refs'?' class="active"':'')+'>参考资料 <span class="n-sub">'+REFS.length+' 份</span></a></div>';
   MODULES.forEach(function(m){
     var list=TOPICS.filter(function(t){return t.m===m.id;});
     html+='<div class="nav-group" id="ng-'+m.id+'"><div class="nav-title" onclick="document.getElementById(\'ng-'+m.id+'\').classList.toggle(\'collapsed\')"><span class="n-dot" style="background:'+m.color+'"></span>'+m.title+' <span class="n-sub">'+list.length+'</span></div>';
@@ -1224,7 +1301,8 @@ function renderOverview(){
     +'<div class="stat-box"><div class="num">'+total+'</div><div class="lab">知识点总数</div></div>'
     +'<div class="stat-box"><div class="num">'+MODULES.length+'</div><div class="lab">模块</div></div>'
     +'<div class="stat-box"><div class="num">'+QDATA.length+'</div><div class="lab">自测试题</div></div>'
-    +'<div class="stat-box"><div class="num">'+GLOSSARY_COUNT+'</div><div class="lab">解码器词素</div></div></div>';
+    +'<div class="stat-box"><div class="num">'+GLOSSARY_COUNT+'</div><div class="lab">解码器词素</div></div>'
+    +'<a class="stat-box" href="#/refs" style="text-decoration:none"><div class="num">'+REFS.length+'</div><div class="lab">参考资料（点击）</div></a></div>';
   h+='<div class="card"><h3>学习路径</h3><p>按模块顺序学习：先掌握<b>基础大气理论</b>（气压/温度/稳定度），再学<b>天气现象成因</b>，随后熟练<b>METAR/TAF/RMK 报文识读</b>，最后结合<b>危险天气运行</b>与<b>法规标准</b>做综合自测。</p><div class="chips">'
     +'<span class="chip blue">基础理论</span><span class="chip">→</span><span class="chip">天气现象</span><span class="chip">→</span><span class="chip">报文识读</span><span class="chip">→</span><span class="chip">运行指南</span><span class="chip">→</span><span class="chip amber">法规标准</span></div></div>';
   h+='<div class="card"><h3>高频考点</h3><div class="chips">'
@@ -1240,7 +1318,7 @@ function renderOverview(){
       +'<h2>'+m.title+' <span class="n-sub" style="font-size:14px;color:var(--text3);font-weight:40px">'+list.length+' 个知识点</span></h2>'
       +'<p>'+m.desc+'</p></div><div class="topic-list">';
     list.forEach(function(t){
-      h+='<a class="topic-item" href="#/topic/'+t.t+'"><div class="ti-t">'+t.ti+'</div><div class="ti-s">'+t.s+'</div></a>';
+      h+='<a class="topic-item" href="#/topic/'+t.t+'"><div class="ti-t">'+t.ti+'</div><div class="ti-s">'+t.s+'</div>'+'<div class="src-tag">来源：'+(t.src?t.src.join('、'):'')+'</div></a>';
     });
     h+='</div></div>';
   });
@@ -1255,31 +1333,135 @@ function renderTopic(id){
   if(idx===undefined){ v.innerHTML='<div class="card"><p>未找到知识点。</p></div>'; return; }
   var t=TOPICS[idx], m=MODMAP[t.m];
   var prev=TOPICS[idx-1], next=TOPICS[idx+1];
+  var tmp=document.createElement('div'); tmp.innerHTML=t.h;
+  var hs=tmp.querySelectorAll('h4');
+  var tocHtml='';
+  if(hs.length){
+    var items=[];
+    Array.prototype.forEach.call(hs,function(h,i){
+      var sid='sec-'+(i+1); h.id=sid;
+      items.push('<a class="toc-link" data-sec="'+sid+'">'+(i+1)+'. '+h.textContent+'</a>');
+    });
+    tocHtml='<div class="toc"><div class="toc-t">本页目录</div>'+items.join('')+'</div>';
+  }
+  var refsHtml='';
+  if(t.src && t.src.length){
+    var ri=t.src.map(function(sn){
+      var r=REFS_BYNAME[sn];
+      return '<div class="ref-item"><span class="ref-name">'+sn+'</span><span class="ref-desc">'+(r?r.desc:'')+'</span></div>';
+    }).join('');
+    refsHtml='<div class="refs-block"><div class="refs-t">参考资料</div>'+ri+'</div>';
+  }
   var h='<div class="detail-bar">'
     +'<a class="back-btn" href="#/">← 返回总览</a>'
-    +'<div class="crumb">'+m.title+' / <b>'+t.ti+'</b></div></div>';
-  h+='<div class="card"><h3><span class="m-ico" style="background:'+m.color+'">'+m.num+'</span>'+t.ti+'</h3>'+t.h+'</div>';
+    +'<div class="crumb">'+m.title+' / <b>'+t.ti+'</b></div>'
+    +'<button class="teach-btn" onclick="startTeach(\''+id+'\')">以此页授课</button></div>';
+  h+='<div class="card"><h3><span class="m-ico" style="background:'+m.color+'">'+m.num+'</span>'+t.ti+'</h3>'+refsHtml+tocHtml+tmp.innerHTML+'</div>';
+  var relHtml='';
+  if(t.rel && t.rel.length){
+    var relItems=t.rel.map(function(rid){
+      var r2=TBYID[rid]!==undefined?TOPICS[TBYID[rid]]:null;
+      if(!r2) return '';
+      return '<a class="rel-item" href="#/topic/'+r2.t+'"><div class="rel-t">'+r2.ti+'</div><div class="rel-m">'+modName(r2.m)+'</div></a>';
+    }).join('');
+    relHtml='<div class="card"><h3>相关知识点</h3><div class="rel-grid">'+relItems+'</div></div>';
+  }
+  h+=relHtml;
   h+='<div class="detail-nav">';
   if(prev){ h+='<a href="#/topic/'+prev.t+'"><span class="dn-lab">← 上一知识点</span><span class="dn-t">'+prev.ti+'</span></a>'; }
   else { h+='<span></span>'; }
   if(next){ h+='<a class="dn-next" href="#/topic/'+next.t+'"><span class="dn-lab">下一知识点 →</span><span class="dn-t">'+next.ti+'</span></a>'; }
   h+='</div>';
   v.innerHTML=h;
+  Array.prototype.forEach.call(v.querySelectorAll('.toc-link'),function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var sec=document.getElementById(a.getAttribute('data-sec'));
+      if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
 }
 
 /* ============ 路由 ============ */
+var __teachReturn='#/';
+function startTeach(tid){
+  if(!TBYID[tid]) return;
+  __teachReturn=location.hash||'#/';
+  if(__teachReturn.indexOf('#/teach/')===0) __teachReturn='#/';
+  location.hash='#/teach/'+tid;
+}
+function exitTeach(){
+  document.body.classList.remove('teach-mode');
+  location.hash=__teachReturn||'#/';
+}
+function renderRefs(){
+  var v=document.getElementById('view');
+  var h='<div class="section-head"><div class="kicker">REFERENCES</div><h2>参考资料目录</h2><p>本知识库依据以下 19 份源文件整理，点击知识点编号可跳转详情。数值与规章以现行有效版本为准。</p></div>';
+  h+='<div class="stat-grid"><div class="stat-box"><div class="num">'+REFS.length+'</div><div class="lab">源文件</div></div>'
+    +'<div class="stat-box"><div class="num">'+TOPICS.length+'</div><div class="lab">关联知识点</div></div></div>';
+  REFS.forEach(function(r,i){
+    var tl=r.topics.map(function(tid){return '<a href="#/topic/'+tid+'">'+tid+'</a>';}).join('');
+    h+='<div class="card ref-card"><h3>'+(i+1)+'. '+r.name+'</h3><p>'+r.desc+'</p>'
+      +'<div class="ref-type">类型：'+r.type+' · 覆盖 '+r.topics.length+' 个知识点</div>'
+      +'<div class="ref-topics">'+(tl||'<span style="color:var(--text3);font-size:12px">—</span>')+'</div></div>';
+  });
+  v.innerHTML=h;
+}
+function renderTeach(id){
+  var idx=TBYID[id];
+  if(idx===undefined){ document.body.classList.remove('teach-mode'); location.hash='#/'; return; }
+  document.body.classList.add('teach-mode');
+  buildSidebar(null);
+  var t=TOPICS[idx], m=MODMAP[t.m];
+  var talk=t.talk||[];
+  var pts=talk.map(function(p,i){
+    return '<div class="tp-card"><div class="tp-n">'+(i+1)+'</div><div class="tp-b">'+p+'</div></div>';
+  }).join('');
+  var prev=TOPICS[idx-1], next=TOPICS[idx+1];
+  var v=document.getElementById('view');
+  v.innerHTML='<div class="teach-wrap">'
+    +'<div class="teach-top"><span class="chip blue">'+m.title+'</span>'
+    +'<span class="teach-prog">'+(idx+1)+' / '+TOPICS.length+'</span>'
+    +'<button class="teach-exit" onclick="exitTeach()">退出授课</button></div>'
+    +'<h1 class="teach-title">'+t.ti+'</h1>'
+    +'<div class="teach-points">'+pts+'</div>'
+    +'<div class="teach-nav">'
+    +(prev?'<button class="tp-nav" onclick="location.hash=\'#/teach/'+prev.t+'\'">← 上一屏</button>':'<span></span>')
+    +'<button class="tp-src" onclick="location.hash=\'#/topic/'+t.t+'\'">查看详情</button>'
+    +(next?'<button class="tp-nav" onclick="location.hash=\'#/teach/'+next.t+'\'">下一屏 →</button>':'<button class="tp-nav" onclick="exitTeach()">完成</button>')
+    +'</div></div>';
+  window.scrollTo(0,0);
+}
 function route(){
   var h=location.hash||'#/';
   window.__closeSb && window.__closeSb();
-  if(h.indexOf('#/quiz')===0){ buildSidebar('quiz'); renderQuiz(); }
+  if(h.indexOf('#/quiz')===0){ document.body.classList.remove('teach-mode'); buildSidebar('quiz'); renderQuiz(); }
+  else if(h.indexOf('#/teach/')===0){
+    renderTeach(h.slice(8));
+  }
+  else if(h==='#/refs'||h.indexOf('#/refs')===0){
+    document.body.classList.remove('teach-mode'); buildSidebar('refs'); renderRefs();
+  }
   else if(h.indexOf('#/topic/')===0){
     var id=h.slice(8);
+    document.body.classList.remove('teach-mode');
     buildSidebar(id); renderTopic(id);
   } else {
+    document.body.classList.remove('teach-mode');
     buildSidebar(null); renderOverview();
   }
   window.scrollTo(0,0);
 }
+document.addEventListener('keydown',function(e){
+  if(!document.body.classList.contains('teach-mode')) return;
+  var h=location.hash;
+  if(h.indexOf('#/teach/')!==0) return;
+  var id=h.slice(8); var idx=TBYID[id];
+  if(idx===undefined) return;
+  if(e.key==='ArrowRight' && TOPICS[idx+1]){ location.hash='#/teach/'+TOPICS[idx+1].t; }
+  else if(e.key==='ArrowLeft' && TOPICS[idx-1]){ location.hash='#/teach/'+TOPICS[idx-1].t; }
+  else if(e.key==='Escape'){ exitTeach(); }
+});
 window.addEventListener('hashchange', route);
 
 /* ============ 搜索 ============ */
