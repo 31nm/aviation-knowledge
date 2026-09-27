@@ -1223,6 +1223,55 @@ var TOPICS=[
 <li>必要时选择长跑道或推迟着陆。</li>
 </ul>
 <div class="callout tip"><span class="co-t">考点速记</span>污染跑道滑跑增长；看刹车效应报告。</div>`,rel:['m4-9','m4-4','m2-9'],src:['AC-91-FS-2013-18 低温冰雪运行指南.pdf','地面结冰条件下的运行 AC-121-50-R2.pdf'],talk:['污染跑道刹车效应差，着陆滑跑距离增长。','湿跑道刹车效应分好、中、差、很差四级。','着陆前评估刹车效应报告和跑道状况代码。','必要时选长跑道或推迟着陆。']},
+{t:'m4-16',m:'m4',ti:'SNOWTAM 雪情通告',s:'专门系列航行通告：跑道表面状况报告（RCR），RWYCC 0~6，最大有效期 8 小时。',h:`<h4>定义与作用</h4>
+<p><strong>SNOWTAM（雪情通告）</strong>是专门系列的航行通告（NOTAM 的一种），用标准格式提供<strong>跑道表面状况报告</strong>，通知活动区内因<strong>雪、冰、雪浆、霜、积水或与之相关的水</strong>而存在的危险情况及其停止。内容来自机场发布的<strong>跑道状况报告（RCR）</strong>，供机组计算起飞着陆性能。</p>
+<h4>发布规则</h4>
+<ul>
+<li>最大有效期 <strong>8 小时</strong>；逾期无新通告视为危险状况解除。</li>
+<li>收到新的 RCR 即发布新 SNOWTAM，<strong>新通告自动取代旧通告</strong>（无需引用旧号）。</li>
+<li>简化报头：<code>SW + 四位序号 + 机场代码 + 观测时间</code>；修正报文同序号加 <code>COR</code>。</li>
+<li>国际分发用 <strong>UTC</strong>、国内分发用 <strong>北京时</strong>；公制单位、不报单位符号。</li>
+<li>报文标志 <code>SNOW TAM</code> + 序号，分「飞机性能计算」与「情景意识」两部分。</li>
+</ul>
+<div class="code">(SNOW TAM 0151
+02170155 16L 2/5/3 100/50/75 04/03/04 SLUSH/DRY SNOW/WET SNOW</div>
+<h4>报文结构（性能计算 A~H + 情景意识 I~T）</h4>
+<div class="tbl-wrap"><table class="tbl">
+<colgroup><col style="width:8%"><col style="width:58%"><col style="width:34%"></colgroup>
+<tr><th>项</th><th>含义</th><th>属性</th></tr>
+<tr><td>A</td><td>机场四字地名代码</td><td>强制</td></tr>
+<tr><td>B</td><td>评估日期时间（月日时分）</td><td>强制</td></tr>
+<tr><td>C</td><td>跑道号码（取数字小的一端）</td><td>强制</td></tr>
+<tr><td>D</td><td>跑道状况代码 RWYCC（每 1/3 段 0~6，如 5/5/2）</td><td>强制</td></tr>
+<tr><td>E</td><td>污染物覆盖百分比（每 1/3 段 25/50/75/100；&lt;10% 或干填 NR）</td><td>条件</td></tr>
+<tr><td>F</td><td>松散污染物深度 mm（每 1/3 段两位数；仅积水/雪浆/湿雪/干雪）</td><td>条件</td></tr>
+<tr><td>G</td><td>跑道状况说明（每 1/3 段污染物类型）</td><td>强制</td></tr>
+<tr><td>H</td><td>RWYCC 对应的跑道宽度（小于公布宽度时）</td><td>选择</td></tr>
+<tr><td>I~T</td><td>情景意识：长度变短、吹积雪、散沙、化学处理、雪堆、滑行道/停机坪差（POOR）、摩阻系数、明语说明</td><td>选择</td></tr>
+</table></div>
+<h4>跑道状况代码（RCAM）</h4>
+<div class="tbl-wrap"><table class="tbl">
+<colgroup><col style="width:8%"><col style="width:58%"><col style="width:34%"></colgroup>
+<tr><th>RWYCC</th><th>道面描述</th><th>刹车评估</th></tr>
+<tr><td>6</td><td>干（DRY）</td><td>—</td></tr>
+<tr><td>5</td><td>霜；湿（水 ≤3 mm）；雪浆/干雪/湿雪 ≤3 mm</td><td>GOOD（正常）</td></tr>
+<tr><td>4</td><td>压实雪（气温 ≤ -15℃）</td><td>GOOD TO MEDIUM</td></tr>
+<tr><td>3</td><td>湿滑跑道；压实雪上有干/湿雪；干/湿雪 &gt;3 mm；压实雪（气温 &gt; -15℃）</td><td>MEDIUM</td></tr>
+<tr><td>2</td><td>积水 &gt;3 mm；雪浆 &gt;3 mm</td><td>MEDIUM TO POOR</td></tr>
+<tr><td>1</td><td>冰（ICE）</td><td>POOR</td></tr>
+<tr><td>0</td><td>湿冰；压实雪上有水；冰上有干/湿雪</td><td>LESS THAN POOR</td></tr>
+</table></div>
+<h4>污染物深度起报与变化阈值</h4>
+<div class="tbl-wrap"><table class="tbl">
+<colgroup><col style="width:28%"><col style="width:36%"><col style="width:36%"></colgroup>
+<tr><th>污染物</th><th>深度起报值</th><th>重大变化阈值</th></tr>
+<tr><td>积水</td><td>04 mm</td><td>03 mm</td></tr>
+<tr><td>雪浆</td><td>03 mm</td><td>03 mm</td></tr>
+<tr><td>湿雪</td><td>03 mm</td><td>05 mm</td></tr>
+<tr><td>干雪</td><td>03 mm</td><td>20 mm</td></tr>
+</table></div>
+<div class="callout tip"><span class="co-t">考点速记</span>SNOWTAM 最大有效期 <b>8 小时</b>、新 RCR 即发新并取代旧；报头 SW+序号；RWYCC 顺序 <b>6 干 → 5 霜/≤3mm → 4 压实雪(≤-15℃) → 3 湿滑/深雪 → 2 积水雪浆&gt;3mm → 1 冰 → 0 湿冰/冰上雪</b>；深度起报 04/03/03/03。</div>
+<div class="callout danger"><span class="co-t">飞行关联</span>机组按 D 项 RWYCC 在飞机制造商性能数据中查起飞着陆性能；<b>0 级刹车最差</b>；落地后实测刹车差于报告时应发特殊空中报告（AIREP）。</div>`,rel:['m4-15','m4-9','m3-8'],src:['雪情通告编发规范（民航规〔2021〕32号）.pdf'],talk:['SNOWTAM 是专门系列的航行通告，标准格式报告跑道表面状况。','最大有效期八小时，收到新跑道状况报告即发布新雪情通告并取代旧通告。','跑道状况代码零到六由跑道状况评估矩阵确定，用于机组查询性能。','简化报头 SW 加四位序号，国际分发用 UTC、国内分发用北京时。']},
 {t:'m5-1',m:'m5',ti:'ICAO 附件三',s:'航空气象服务国际标准与建议措施。',h:`<h4>附件三框架</h4><ul><li>观测/预报/警报/交换四大块。</li><li>各国航空气象服务的国际总章。</li></ul><p><strong>ICAO 附件三（Annex 3）《国际航空气象服务》</strong>是各国航空气象服务的国际标准，规定观测、预报、情报交换与服务机构职责。</p>
 <ul>
 <li>观测：METAR/SPECI、自动观测、地面/高空观测；</li>
@@ -1346,6 +1395,7 @@ var REFS=[
  {name:'an03_21ed.pdf',type:'国际文件',desc:'ICAO Annex 3 21st edition (English)。',topics:['m5-1']},
  {name:'PANS-MET.pdf',type:'国际文件',desc:'PANS-MET《空中航行服务程序——气象》。',topics:['m5-1']},
  {name:'10157_1ed_en.pdf',type:'国际文件',desc:'Doc 10157 国际航空气象配套文件。',topics:['m5-8']},
+ {name:'雪情通告编发规范（民航规〔2021〕32号）.pdf',type:'规范',desc:'雪情通告编发规范：跑道表面状况评估与 SNOWTAM 新格式（GRF）。',topics:['m4-16']},
 ];
 var REFS_BYNAME={}; REFS.forEach(function(r){REFS_BYNAME[r.name]=r;});
 
