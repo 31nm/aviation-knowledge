@@ -839,7 +839,7 @@ var TOPICS=[
 <tr><td>温度露点</td><td>℃，零下加 M；能见度 9999 表示 ≥10 km</td></tr>
 </table></div>
 <div class="callout tip"><span class="co-t">考点速记</span>风为 2 分钟平均；RVR 单位米；QNH 是 METAR 唯一气压组。</div>`,rel:['m3-2','m5-3','m3-12'],src:['民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf','国际气象报文识读.pptx'],talk:['地面观测以自动气象观测系统为主、人工为辅。','观测项目含风、气压、温露、云、能见度、天气现象、降水和 RVR。','风报两分钟平均，阵风为十秒极值。','METAR 只发 QNH，能见度九九九九代表大于等于十公里。']},
-{t:'m3-2',m:'m3',ti:'METAR/SPECI 报文结构',s:'六段式：报头+风+能见度+天气+云+温露/气压/趋势；SPECI 达阈值随时发布。',h:`<p><strong>METAR</strong> 为例行日常天气报告（每半小时/每小时），<strong>SPECI</strong> 为特殊天气报告（达到阈值随时发布）。</p>
+{t:'m3-2',m:'m3',ti:'METAR/SPECI 报文结构',s:'六段式：报头+风+能见度+天气+云+温露/气压/趋势；SPECI 达阈值随时发布；末尾附 2 小时 TREND。',h:`<p><strong>METAR</strong> 为例行日常天气报告（每半小时/每小时），<strong>SPECI</strong> 为特殊天气报告（达到阈值随时发布）。</p>
 <div class="code">ZBAA 080000Z 24008G14MPS 4000 -RA FEW033 BKN060 18/12 Q1015 NOSIG=</div>
 <h4>六段拆解</h4>
 <div class="tbl-wrap"><table class="tbl">
@@ -865,7 +865,28 @@ var TOPICS=[
 <tr><td>垂直能见度</td><td>天空遮蔽时跨过 30 / 60 / 150 / 300 m</td><td>同云高阈值</td></tr>
 </table></div>
 <div class="callout tip"><span class="co-t">考点速记</span>风：60°+5、5、8 m/s；能见度跨 0.8/1.5/3/5 km；RVR 按进近类别 550/300/175/50；云与垂直能见度跨 30/60/150/300 m；天气现象分<b>强度变化组</b>与<b>发生终止组</b>。<b>转坏：观测开始后 5 分钟内发出；转好：维持 10 分钟再观测，5 分钟内发出</b>；一要素转坏伴另一要素转好时只发一份、按转坏处理。</div>
-<div class="callout tip"><span class="co-t">考点速记</span>顺序固定：<b>风→能见度→天气→云→温露→气压→趋势</b>；时组 Z 为 UTC；趋势 NOSIG/BECMG/TEMPO。</div>`,rel:['m3-1','m3-9','m3-11'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['METAR 例行、SPECI 特殊，报文按六段固定顺序排列。','SPECI 在风、能见度、RVR、天气现象、云、垂直能见度达到本场标准时随时发布，转坏 5 分钟内发出、转好须维持 10 分钟。','顺序是风、能见度、天气、云、温露、气压、趋势。','时组 Z 代表世界时，趋势组有 NOSIG、BECMG、TEMPO。','读懂六段就能拆解绝大多数例行报文。']},
+<h4>趋势预报（TREND）</h4>
+<p>趋势预报是附着于 <strong>METAR/SPECI</strong> 之后的着陆预报，预测着陆区未来 <strong>2 小时</strong>（自所附天气报告时间起算）的显著变化，服务本场航空气象用户与距场 1 小时以内飞行时间的航空器；自动生成的天气报告可不附带趋势预报。</p>
+<ul>
+<li>只编报预期有<strong>重大变化</strong>的要素：地面风、能见度、天气现象、云（垂直能见度）；顺序、术语、单位与所附报告一致。</li>
+<li>无重大变化报 <strong>NOSIG</strong>；变化指示码 <strong>BECMG</strong>（渐变，变化时段不超过 2 小时）或 <strong>TEMPO</strong>（短时波动，每次 &lt;1 小时、累计小于波动时段一半）；一般不超过 3 组，同起始时间 BECMG 优先。</li>
+<li>时间限定符 <strong>FM</strong>（自…时起）/ <strong>TL</strong>（至…时止）/ <strong>AT</strong>（在…时刻）紧接 4 位 UTC 时分；起止与趋势时段相同或时间不确定时，可只用 BECMG/TEMPO。</li>
+<li>能见度变化应注明引起降低的天气现象；云有重大变化时所有云组（含无变化云层）均编报。</li>
+</ul>
+<div class="tbl-wrap"><table class="tbl">
+<colgroup><col style="width:16%"><col style="width:58%"><col style="width:26%"></colgroup>
+<tr><th>要素</th><th>重大变化触发标准</th><th>记忆要点</th></tr>
+<tr><td>风</td><td>平均风向变化 ≥60° 且变化前/后平均风速 ≥5 m/s；平均风速变化 ≥5 m/s；或跨过换跑道、顺风/侧风极限等运行重要值</td><td>同 SPECI 风组</td></tr>
+<tr><td>能见度</td><td>上升达到或下降经过 150 / 350 / 600 / 800 / 1500 / 3000 m（大量 VFR 再加 5000 m）</td><td>比 SPECI 多 150/350/600</td></tr>
+<tr><td>天气现象</td><td>预期 1~3 种重要天气现象的开始、结束或强度变化</td><td>最多 3 种</td></tr>
+<tr><td>云</td><td>最低 BKN/OVC 云层云底跨过 30/60/150/300 m（大量 VFR 加 450 m）；云量跨过 5/8；CB 出现或消失</td><td>同 SPECI 云组</td></tr>
+<tr><td>垂直能见度</td><td>天空遮蔽时跨过 30 / 60 / 150 / 300 m</td><td>同云高阈值</td></tr>
+</table></div>
+<div class="code">BECMG FM0130 3000 RA BR=
+METAR ... NOSIG=</div>
+<div class="callout tip"><span class="co-t">考点速记</span>TREND 附 METAR/SPECI 后、有效 <b>2 小时</b>；无变化 <b>NOSIG</b>、渐变 <b>BECMG</b>、波动 <b>TEMPO</b>；时间限定 <b>FM/TL/AT</b>；只报重大变化要素；<b>不用 PROB</b>（概率组仅用于 TAF）；能见度阈值 150/350/600/800/1500/3000 m 比 SPECI 更细。</div>
+
+<div class="callout tip"><span class="co-t">考点速记</span>顺序固定：<b>风→能见度→天气→云→温露→气压→趋势</b>；时组 Z 为 UTC；趋势 NOSIG/BECMG/TEMPO。</div>`,rel:['m3-1','m3-9','m3-11'],src:['国际气象报文识读.pptx','民航气象常用缩略语及符号含义.docx','世界气象组织《电码手册》WMO-No.306（英文）','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf','民用航空气象预报规范 AP-117-TM-2019-01.pdf'],talk:['METAR 例行、SPECI 特殊，报文按六段固定顺序排列。','SPECI 在风、能见度、RVR、天气现象、云、垂直能见度达到本场标准时随时发布，转坏 5 分钟内发出、转好须维持 10 分钟。','顺序是风、能见度、天气、云、温露、气压、趋势。','时组 Z 代表世界时，趋势组有 NOSIG、BECMG、TEMPO。','趋势预报附着于 METAR/SPECI，有效两小时，只报风、能见度、天气、云的显著变化，无变化报 NOSIG。','读懂六段就能拆解绝大多数例行报文。']},
 {t:'m3-3',m:'m3',ti:'TAF 航站预报',s:'按有效期发趋势；FM/BECMG/TEMPO/PROB 组管理变化。',h:`<p><strong>TAF</strong> 为机场着陆区 5 km 半径内的定时预报，有效期 9~30 h。</p>
 <div class="code">TAF ZBAA 080000Z 0800/0906 24008G14MPS 4000 -RA BKN060 TX20/0800Z TN11/0812Z TEMPO 0803/0808 1200 +RA=</div>
 <h4>变化指示组</h4>
@@ -1384,7 +1405,7 @@ var REFS=[
  {name:'CCAR117-R2 中国民用航空气象工作规则.pdf',type:'规章',desc:'CCAR-117-R2：中国民用航空气象工作规则，气象工作母法。',topics:['m5-2','m5-3','m5-4','m5-5','m5-6','m5-9','m5-10','m5-12','m5-13','m5-14']},
  {name:'民用航空气象服务管理办法.pdf',type:'规章',desc:'民用航空气象服务管理办法：服务机构与人员管理。',topics:['m4-11','m5-10','m5-11','m5-13']},
  {name:'民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf',type:'规范',desc:'民用航空气象地面观测规范 AP-117-TM-2021-01R2。',topics:['m2-3','m3-1','m3-2','mr-1','m3-10','m3-12','m4-4','m5-3','m5-5','m5-9','m5-12']},
- {name:'民用航空气象预报规范 AP-117-TM-2019-01.pdf',type:'规范',desc:'民用航空气象预报规范 AP-117-TM-2019-01。',topics:['m3-3','m3-4','m3-5','m3-8','m4-10','m4-12','m5-4','m5-6','m5-7','m5-9']},
+ {name:'民用航空气象预报规范 AP-117-TM-2019-01.pdf',type:'规范',desc:'民用航空气象预报规范 AP-117-TM-2019-01。',topics:['m3-2','m3-3','m3-4','m3-5','m3-8','m4-10','m4-12','m5-4','m5-6','m5-7','m5-9']},
  {name:'民航气象情报发布与交换办法 AP-117-TM-2009-01R2.pdf',type:'规范',desc:'民航气象情报发布与交换办法 AP-117-TM-2009-01R2。',topics:['m3-7','m3-8','m5-4','m5-7','m5-8','m5-11','m5-14']},
  {name:'地面结冰条件下的运行 AC-121-50-R2.pdf',type:'咨询通告',desc:'地面结冰条件下的运行 AC-121-50-R2：除防冰与保持时间。',topics:['m2-5','m4-5','m4-9','m4-14','m4-15']},
  {name:'世界气象组织《电码手册》WMO-No.306（英文）',type:'手册',desc:'WMO-No.306 电码手册（英文）：报文电码与缩略语国际标准。',topics:['m3-2','mr-1','m3-9','m3-11','m3-13','m3-14']},
