@@ -1140,7 +1140,27 @@ METAR ... NOSIG=</div>
 <li>避免在强切变下勉强着陆。</li>
 </ul>
 <div class="callout tip"><span class="co-t">考点速记</span>四种切变；改出=复飞+TOGA+带杆；1600 ft 以下。</div>`,rel:['m2-7','m4-2','m4-11'],src:['AC-91-FS-2014-20 雷暴晴空颠簸低空风切变指南.pdf','AOC气象教材第三分册.doc'],talk:['低空风切变在地面到一千六百英尺间最危险。','识别靠多普勒雷达告警和空速高度突变。','改出立即复飞，保持或增大推力至 TOGA。','带杆至 VREF 加适当姿态，避免在强切变下勉强着陆。']},
-{t:'m4-4',m:'m4',ti:'低能见度运行',s:'VIS/RVR 分级；低能见度程序 LVP。',h:`<h4>RVR 运行分级</h4><ul><li>CAT I ≥550 m、II ≥300 m、IIIa ≥200 m、IIIb ≥75 m。</li><li>RVR&lt;550 m 启动 LVP。</li></ul><p>低能见度是进近着陆主要威胁。按 RVR 决定运行等级。</p>
+{t:'m4-4',m:'m4',ti:'全天候运行（AWO）与低能见度运行',s:'LVO=进近 RVR<550 m 或 DH<60 m、起飞 RVR<400 m；SA CAT I/II、CAT II/III、LVTO、CMV。',h:`<h4>全天候运行（AWO）</h4>
+<p><strong>AWO（All-Weather Operations）</strong>是系统概念：既包括地面导航设施、目视助航设施、服务程序、障碍物等<strong>机场与空管</strong>要素，也包括机载设备、机组能力、飞行操作程序等<strong>航空器运营人</strong>要素，需机场、空管、飞行三方共同参与配合。</p>
+<h4>运行最低标准的表示</h4>
+<ul>
+<li><strong>起飞</strong>：RVR 或 VIS（可同时获得时<strong>以 RVR 为准</strong>）+ 必要时云底高补充；预计该能见度下驾驶员可获得充分外部目视参考控制滑跑。</li>
+<li><strong>进近着陆</strong>：MDA/H 或 DA/H + 最小能见度（VIS 或接地段 RVR）；接地段 RVR 不可用时可用中间段 RVR 参考。</li>
+<li><strong>着陆滑跑</strong>：最小能见度要素（中间段 RVR + 停止段 RVR）。</li>
+</ul>
+<h4>低能见度运行（LVO）与运行分类</h4>
+<p><strong>低能见度运行（LVO）</strong>：跑道视程低于 550 m 和/或决断高低于 60 m（200 ft）的进近运行，或跑道视程低于 400 m 的起飞运行。</p>
+<div class="tbl-wrap"><table class="tbl">
+<colgroup><col style="width:24%"><col style="width:76%"></colgroup>
+<tr><th>运行种类</th><th>含义</th></tr>
+<tr><td>LVTO</td><td>仅低能见度起飞：RVR&lt;400 m 的起飞运行</td></tr>
+<tr><td>SA CAT I</td><td>特殊批准 I 类：DH≥45 m（150 ft）、RVR≥400 m，需特殊批准</td></tr>
+<tr><td>SA CAT II</td><td>特殊批准 II 类：在不完全满足 II 类建设要求的跑道实施</td></tr>
+<tr><td>CAT II</td><td>DH&lt;60 m 且≥30 m，RVR≥300 m</td></tr>
+<tr><td>CAT III</td><td>DH&lt;30 m 或无 DH，RVR&lt;300 m 或无限制（IIIA/IIIB/IIIC）</td></tr>
+<tr><td>EFVS 运行</td><td>增强飞行视景系统辅助进近（DH&lt;60 m 或 RVR&lt;550 m 属 LVO）</td></tr>
+</table></div>
+<h4>RVR 运行分级速查</h4>
 <div class="tbl-wrap"><table class="tbl">
 <colgroup><col style="width:30%"><col style="width:38%"><col style="width:32%"></colgroup>
 <tr><th>RVR</th><th>运行</th><th>典型设施</th></tr>
@@ -1151,7 +1171,28 @@ METAR ... NOSIG=</div>
 <tr><td>≥75 m</td><td>IIIb 类运行</td><td>自动着陆</td></tr>
 <tr><td>&lt;75 m</td><td>IIIc 运行</td><td>无滑出引导</td></tr>
 </table></div>
-<div class="callout tip"><span class="co-t">考点速记</span>CAT I≥550 m、II≥300 m、IIIa≥200 m、IIIb≥75 m；LVP 在 RVR&lt;550 m 启动。</div>`,rel:['m3-10','m4-11','m2-3','m4-18'],src:['AOC气象教材第三分册.doc','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['低能见度运行按 RVR 分级决定类别。','CAT I 常规进近 RVR 大于五百五十米，二类运行三百米。','三类运行 RVR 可低至七十五米甚至更低。','RVR 小于五百五十米启动低能见度程序 LVP。']},
+<p>注：速查表按 RVR 简化分级；官方定义见上表（CAT III 对应 DH&lt;30 m、RVR&lt;300 m 或无限制）。</p>
+<h4>进近类型与 2D/3D</h4>
+<ul>
+<li><strong>NPA</strong>（非精密进近）：仅横向引导，2D 技术（VOR/NDB/LOC/LP/LDA）。</li>
+<li><strong>APV</strong>（垂直引导进近）：LNAV+VNAV，3D 技术，DH 不低于 75 m。</li>
+<li><strong>PA</strong>（精密进近）：横向+垂直引导，3D 技术（ILS/MLS/GBAS/SBAS），允许 DH&lt;75 m。</li>
+<li>进近运行分类：<strong>A 类</strong> MDH/DH≥75 m；<strong>B 类</strong> DH&lt;75 m（再分 CAT I/II/III）。</li>
+</ul>
+<h4>CMV 与 RVR/VIS 转换</h4>
+<ul>
+<li><strong>CMV</strong>：无 RVR 报告时由气象能见度换算的等效 RVR；<strong>起飞运行与 RVR&lt;800 m 的进近最低标准不可用 CMV</strong>。</li>
+<li>签派放行阶段：VIS×1.0；飞行实施阶段按灯光折算：<strong>高光强灯 白天×1.5、夜间×2.0</strong>；其他灯光 白天×1.0、夜间×1.5；无灯光仅白天×1.0。</li>
+</ul>
+<div class="code">RVR/VIS 对照：175 m=600 ft；550 m=1800 ft；1/4 sm=400 m；3/8 sm=600 m；1/2 sm=800 m；3/4 sm=1200 m</div>
+<h4>LVP 与气象服务</h4>
+<ul>
+<li><strong>LVP</strong>：为保障 LVO 安全，机场实施的一系列特定程序；开放 II/III 类保障须变更机场运营许可证（4F 向民航局、4E 及以下向地区管理局申请）。</li>
+<li>当主导能见度&lt;1000 m 或 5/8 以上云量云高&lt;100 m 时，气象机构提供低能见度运行观测/预报服务。</li>
+<li>通报 RVR 值：550/450/400/350/300/200/175/150/75/50 m；云高：90/60/45/30/15 m。</li>
+</ul>
+<div class="callout tip"><span class="co-t">考点速记</span>LVO=进近 <b>RVR&lt;550 m 或 DH&lt;60 m</b>、起飞 <b>RVR&lt;400 m</b>；速查：<b>CAT I≥550 m、II≥300 m、IIIa≥200 m、IIIb≥75 m</b>；LVP 在 RVR&lt;550 m 启动；<b>CMV 不可用于起飞与 RVR&lt;800 m 标准</b>；AWO 三方：<b>机场+空管+飞行</b>。</div>
+<div class="callout danger"><span class="co-t">飞行关联</span>DH/MDH 处须清晰可见进近灯光系统（仅用灯光须见侧边短排灯）、跑道入口、跑道入口灯、接地区等<b>目视参考之一</b>，否则必须复飞；RVR 报告点按接地段/中间段/停止段逐级要求。</div>`,rel:['m3-10','m4-11','m2-3','m4-17'],src:['全天候运行规定 AC-91-FS/CA/TM-2026-16R2.pdf','AOC气象教材第三分册.doc','民用航空气象地面观测规范 AP-117-TM-2021-01R2.pdf'],talk:['全天候运行是机场、空管、飞行三方共同参与的系统工程。','低能见度运行定义：进近跑道视程低于五百五十米或决断高低于六十米，或起飞跑道视程低于四百米。','特殊批准一类运行决断高不低于四十五米、跑道视程不低于四百米。','按跑道视程简化分级：一类五百五十米、二类三百米、三类运行可低至七十五米甚至更低。','转换气象能见度不可用于起飞运行和跑道视程低于八百米的进近标准。','进近分非精密、垂直引导和精密三类，分别用二维或三维技术飞行。']},
 {t:'m4-5',m:'m4',ti:'飞机积冰运行',s:'明冰最危险；-2~-10℃ 强积冰；改出变高度。',h:`<ul>
 <li>明冰透明坚硬、附着强，危害最大；</li>
 <li>强积冰温度 -2~-10℃，由大过冷水滴形成；</li>
@@ -1215,7 +1256,7 @@ METAR ... NOSIG=</div>
 <li>目视参考要求：见跑道灯光/标志；</li>
 <li>着陆最低标准由机场、机型、机组资质与设施决定。</li>
 </ul>
-<div class="callout tip"><span class="co-t">考点速记</span>精密=DH 即复飞；非精密=MDH 可平飞；RVR 决定运行类别。</div>`,rel:['m4-4','m4-12','m3-10','m4-18'],src:['AOC气象教材第三分册.doc','民用航空气象服务管理办法.pdf'],talk:['精密进近以决断高 DH 为界，到 DH 未见跑道即复飞。','非精密进近以最低下降高 MDH 为参考，可在 MDA 平飞。','着陆最低标准由机场、机型、机组资质和设施决定。','RVR 决定运行类别，目视参考要求见到跑道灯光标志。']},
+<div class="callout tip"><span class="co-t">考点速记</span>精密=DH 即复飞；非精密=MDH 可平飞；RVR 决定运行类别。</div>`,rel:['m4-4','m4-12','m3-10'],src:['AOC气象教材第三分册.doc','民用航空气象服务管理办法.pdf'],talk:['精密进近以决断高 DH 为界，到 DH 未见跑道即复飞。','非精密进近以最低下降高 MDH 为参考，可在 MDA 平飞。','着陆最低标准由机场、机型、机组资质和设施决定。','RVR 决定运行类别，目视参考要求见到跑道灯光标志。']},
 {t:'m4-12',m:'m4',ti:'备降场天气要求',s:'目的地天气低于着陆最低时必须选备降场。',h:`<h4>备降条件</h4><ul><li>目的天气差 → 选备降。</li><li>备降场天气须高于备降标准。</li></ul><ul>
 <li>起飞机场必须有天气低于着陆最低标准时的备降方案；</li>
 <li>目的地预报在到达前后 1 小时天气低于着陆最低标准，须选择备降场；</li>
@@ -1333,48 +1374,7 @@ METAR ... NOSIG=</div>
 <tr><td>燃油紧急（MAYDAY fuel）</td><td>预计落地低于最后储备，宣布后管制优先保障</td></tr>
 </table></div>
 <div class="callout tip"><span class="co-t">考点速记</span>边缘天气三问：<b>实况？趋势？备降？</b>；起飞须等于或高于标准；<b>DA/DH 无目视必复飞</b>；新机长 DH+30 m、VIS+800 m；边缘 = 多带油 + 可靠备降 + 设决策时间节点。</div>
-<div class="callout danger"><span class="co-t">飞行关联</span>多次复飞与等待会迅速消耗燃油（一次约 120 kg/min）；预报有 <b>TEMPO 短时低于标准</b> 即按边缘天气准备，避免到 DA 才发现无目视参考。</div>`,rel:['m4-11','m4-12','m4-4','m4-10','m4-18'],src:['AOC气象教材第三分册.doc'],talk:['边缘天气指实况或预报接近但不低于运行最低标准的临界状态。','放行要求气象条件等于或高于公布最低标准，签派与机长共同决策。','新机长着陆标准 MDH 或 DH 增加三十米、能见度增加八百米。','到达决断高或最低下降高未取得目视参考必须复飞。','边缘天气应多带酌情油量、选可靠备降场并设置决策时间节点。']},
-{t:'m4-18',m:'m4',ti:'全天候运行（AWO）与低能见度运行',s:'LVO=进近 RVR<550 m 或 DH<60 m、起飞 RVR<400 m；SA CAT I/II、CAT II/III、LVTO、CMV。',h:`<h4>全天候运行（AWO）</h4>
-<p><strong>AWO（All-Weather Operations）</strong>是系统概念：既包括地面导航设施、目视助航设施、服务程序、障碍物等<strong>机场与空管</strong>要素，也包括机载设备、机组能力、飞行操作程序等<strong>航空器运营人</strong>要素，需机场、空管、飞行三方共同参与配合。</p>
-<h4>运行最低标准的表示</h4>
-<ul>
-<li><strong>起飞</strong>：RVR 或 VIS（可同时获得时<strong>以 RVR 为准</strong>）+ 必要时云底高补充；预计该能见度下驾驶员可获得充分外部目视参考控制滑跑。</li>
-<li><strong>进近着陆</strong>：MDA/H 或 DA/H + 最小能见度（VIS 或接地段 RVR）；接地段 RVR 不可用时可用中间段 RVR 参考。</li>
-<li><strong>着陆滑跑</strong>：最小能见度要素（中间段 RVR + 停止段 RVR）。</li>
-</ul>
-<h4>LVO 定义与运行分类</h4>
-<p><strong>低能见度运行（LVO）</strong>：跑道视程低于 550 m 和/或决断高低于 60 m（200 ft）的进近运行，或跑道视程低于 400 m 的起飞运行。</p>
-<div class="tbl-wrap"><table class="tbl">
-<colgroup><col style="width:24%"><col style="width:76%"></colgroup>
-<tr><th>运行种类</th><th>含义</th></tr>
-<tr><td>LVTO</td><td>仅低能见度起飞：RVR&lt;400 m 的起飞运行</td></tr>
-<tr><td>SA CAT I</td><td>特殊批准 I 类：DH≥45 m（150 ft）、RVR≥400 m，需特殊批准</td></tr>
-<tr><td>SA CAT II</td><td>特殊批准 II 类：在不完全满足 II 类建设要求的跑道实施</td></tr>
-<tr><td>CAT II</td><td>DH&lt;60 m 且≥30 m，RVR≥300 m</td></tr>
-<tr><td>CAT III</td><td>DH&lt;30 m 或无 DH，RVR&lt;300 m 或无限制（IIIA/IIIB/IIIC）</td></tr>
-<tr><td>EFVS 运行</td><td>增强飞行视景系统辅助进近（DH&lt;60 m 或 RVR&lt;550 m 属 LVO）</td></tr>
-</table></div>
-<h4>进近类型与 2D/3D</h4>
-<ul>
-<li><strong>NPA</strong>（非精密进近）：仅横向引导，2D 技术（VOR/NDB/LOC/LP/LDA）。</li>
-<li><strong>APV</strong>（垂直引导进近）：LNAV+VNAV，3D 技术，DH 不低于 75 m。</li>
-<li><strong>PA</strong>（精密进近）：横向+垂直引导，3D 技术（ILS/MLS/GBAS/SBAS），允许 DH&lt;75 m。</li>
-<li>进近运行分类：<strong>A 类</strong> MDH/DH≥75 m；<strong>B 类</strong> DH&lt;75 m（再分 CAT I/II/III）。</li>
-</ul>
-<h4>CMV 与 RVR/VIS 转换</h4>
-<ul>
-<li><strong>CMV</strong>：无 RVR 报告时由气象能见度换算的等效 RVR；<strong>起飞运行与 RVR&lt;800 m 的进近最低标准不可用 CMV</strong>。</li>
-<li>签派放行阶段：VIS×1.0；飞行实施阶段按灯光折算：<strong>高光强灯 白天×1.5、夜间×2.0</strong>；其他灯光 白天×1.0、夜间×1.5；无灯光仅白天×1.0。</li>
-</ul>
-<div class="code">RVR/VIS 对照：175 m=600 ft；550 m=1800 ft；1/4 sm=400 m；3/8 sm=600 m；1/2 sm=800 m；3/4 sm=1200 m</div>
-<h4>LVP 与气象服务</h4>
-<ul>
-<li><strong>LVP</strong>：为保障 LVO 安全，机场实施的一系列特定程序；开放 II/III 类保障须变更机场运营许可证（4F 向民航局、4E 及以下向地区管理局申请）。</li>
-<li>当主导能见度&lt;1000 m 或 5/8 以上云量云高&lt;100 m 时，气象机构提供低能见度运行观测/预报服务。</li>
-<li>通报 RVR 值：550/450/400/350/300/200/175/150/75/50 m；云高：90/60/45/30/15 m。</li>
-</ul>
-<div class="callout tip"><span class="co-t">考点速记</span>LVO=进近 <b>RVR&lt;550 m 或 DH&lt;60 m</b>、起飞 <b>RVR&lt;400 m</b>；SA CAT I 为 DH≥45 m/RVR≥400 m；<b>CMV 不可用于起飞与 RVR&lt;800 m 标准</b>；AWO 三方：<b>机场+空管+飞行</b>。</div>
-<div class="callout danger"><span class="co-t">飞行关联</span>DH/MDH 处须清晰可见进近灯光系统（仅用灯光须见侧边短排灯）、跑道入口、跑道入口灯、接地区等<b>目视参考之一</b>，否则必须复飞；RVR 报告点按接地段/中间段/停止段逐级要求。</div>`,rel:['m4-4','m4-11','m4-17','m3-10'],src:['全天候运行规定 AC-91-FS/CA/TM-2026-16R2.pdf'],talk:['全天候运行是机场、空管、飞行三方共同参与的系统工程。','低能见度运行定义：进近跑道视程低于五百五十米或决断高低于六十米，或起飞跑道视程低于四百米。','特殊批准一类运行决断高不低于四十五米、跑道视程不低于四百米。','转换气象能见度不可用于起飞运行和跑道视程低于八百米的进近标准。','进近分非精密、垂直引导和精密三类，分别用二维或三维技术飞行。']},
+<div class="callout danger"><span class="co-t">飞行关联</span>多次复飞与等待会迅速消耗燃油（一次约 120 kg/min）；预报有 <b>TEMPO 短时低于标准</b> 即按边缘天气准备，避免到 DA 才发现无目视参考。</div>`,rel:['m4-11','m4-12','m4-4','m4-10'],src:['AOC气象教材第三分册.doc'],talk:['边缘天气指实况或预报接近但不低于运行最低标准的临界状态。','放行要求气象条件等于或高于公布最低标准，签派与机长共同决策。','新机长着陆标准 MDH 或 DH 增加三十米、能见度增加八百米。','到达决断高或最低下降高未取得目视参考必须复飞。','边缘天气应多带酌情油量、选可靠备降场并设置决策时间节点。']},
 {t:'m5-1',m:'m5',ti:'ICAO 附件三',s:'航空气象服务国际标准与建议措施。',h:`<h4>附件三框架</h4><ul><li>观测/预报/警报/交换四大块。</li><li>各国航空气象服务的国际总章。</li></ul><p><strong>ICAO 附件三（Annex 3）《国际航空气象服务》</strong>是各国航空气象服务的国际标准，规定观测、预报、情报交换与服务机构职责。</p>
 <ul>
 <li>观测：METAR/SPECI、自动观测、地面/高空观测；</li>
@@ -1499,7 +1499,7 @@ var REFS=[
  {name:'PANS-MET.pdf',type:'国际文件',desc:'PANS-MET《空中航行服务程序——气象》。',topics:['m5-1']},
  {name:'10157_1ed_en.pdf',type:'国际文件',desc:'Doc 10157 国际航空气象配套文件。',topics:['m5-8']},
  {name:'雪情通告编发规范（民航规〔2021〕32号）.pdf',type:'规范',desc:'雪情通告编发规范：跑道表面状况评估与 SNOWTAM 新格式（GRF）。',topics:['m4-16']},
- {name:'全天候运行规定 AC-91-FS/CA/TM-2026-16R2.pdf',type:'咨询通告',desc:'全天候运行规定（民航规〔2026〕3号）：LVO/LVTO、SA CAT I/II、进近分类、CMV 与 RVR/VIS 转换。',topics:['m4-18','m4-4','m4-11']},
+ {name:'全天候运行规定 AC-91-FS/CA/TM-2026-16R2.pdf',type:'咨询通告',desc:'全天候运行规定（民航规〔2026〕3号）：LVO/LVTO、SA CAT I/II、进近分类、CMV 与 RVR/VIS 转换。',topics:['m4-4','m4-11']},
 ];
 var REFS_BYNAME={}; REFS.forEach(function(r){REFS_BYNAME[r.name]=r;});
 
